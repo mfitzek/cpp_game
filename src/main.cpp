@@ -7,8 +7,10 @@ using namespace GameEngine;
 
 int main(int argc, char *argv[])
 {
+    
    Game game;
    game.init();
+   game.start();
 
 
     return 0;
