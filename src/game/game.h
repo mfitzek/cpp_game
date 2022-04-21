@@ -1,8 +1,10 @@
 #pragma once
 
 #include <memory>
-#include <SDL.h>
 #include "window.h"
+
+
+#include <SDL.h>
 
 class Game
 {

@@ -7,7 +7,7 @@ set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 
 
-add_subdirectory(dependencies/sdl)
+# add_subdirectory(dependencies/sdl)
 
 # if(WIN32)
 #     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
@@ -20,20 +20,26 @@ FILE(GLOB src_files
 )
 
 
-set(lib_SDL2 "${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2")
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/sdl2)
 
+set(SDL2_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2)
 
+find_package(SDL2 REQUIRED)
 
-include_directories(${lib_SDL2}/include)
-
-link_directories(${lib_SDL2}/lib/x64)
+include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME} ${src_files})
 
-target_link_libraries( ${PROJECT_NAME} SDL2 SDL2main )
+target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} )
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -v)
+
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+         "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/SDL2.dll"
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 
 
