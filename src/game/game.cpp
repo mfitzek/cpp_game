@@ -1,47 +1,55 @@
 #include "game.h"
 
+ #include <stdlib.h>
 
-namespace GameEngine
+Game::Game()
+{
+}
+
+Game::~Game()
+{
+    window.release();
+}
+
+void Game::init()
+{
+    window = std::make_unique<Window>();
+}
+
+void Game::loop()
 {
 
-    Game::Game(){
-
-    }
-
-    Game::~Game(){
-        window.release();
-    }
-
-    void Game::init()
+    while (running)
     {
-        window = std::make_unique<Window>();
-        
-    }
+        handle_events();
 
-    void Game::loop(){
-        SDL_Event test_event;
-
-        while(running){
-            SDL_PollEvent(&test_event);
-
-            if(test_event.type == SDL_QUIT){
-                running = false;
-            }        
-
-            render();
-
-            sleep(0);
-        }
+        render();
 
     }
+}
 
-    void Game::render(){
-        window->Clear();
+void Game::handle_events()
+{
+    SDL_Event event;
+    SDL_PollEvent(&event);
+    switch (event.type)
+    {
+    case SDL_QUIT:
+        running = false;
+        break;
+
+    default:
+        break;
     }
+}
 
-    void Game::start(){
-        running=true;
-        loop();
-    }
+void Game::render()
+{
+    window->Clear();
+}
 
+void Game::run()
+{
+    running = true;
+    loop();
 }
