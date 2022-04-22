@@ -89,6 +89,13 @@ void Game::handle_events(SDL_Event event)
         Input::Get().SetMouseCoords(event.motion.x, event.motion.y);
         break;
 
+    case SDL_MOUSEBUTTONDOWN:
+        Input::Get().SetMouseBtn(event.button.button, true);
+    break;
+    case SDL_MOUSEBUTTONUP:
+        Input::Get().SetMouseBtn(event.button.button, false);
+    break;
+
     default:
         break;
     }
@@ -111,10 +118,10 @@ void Game::render()
     Input::Get().GetMouseCoords(x,y);
 
     SDL_Rect rect {
-        .x = x,
-        .y = y,
-        .w = 50,
-        .h = 50
+        .x = x-5,
+        .y = y-5,
+        .w = 10,
+        .h = 10
     };
 
     SDL_SetRenderDrawColor(render, 255,255,255,255);

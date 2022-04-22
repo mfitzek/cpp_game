@@ -27,11 +27,19 @@ void Player::update(float delta){
         this->x += x_speed*delta;
     }
 
+    if(Input::Get().GetKeyDown(SDLK_SPACE)){
+        jump();
+    }
+
     if(this->y + (y_velocity* delta) < (720-height)){
         this->y += (y_velocity* delta);
     }else{
         this->y = (720-height);
     }
+}
+
+bool Player::is_falling(){
+    return this->y < (720-height);
 }
 
 
@@ -46,7 +54,8 @@ void Player::tick(){
 }
 
 void Player::jump(){
-    this->y_velocity = -360.f;
+    if(!is_falling())
+    this->y_velocity = -500.f;
 }
 
 void Player::render(SDL_Renderer *renderer){
@@ -58,6 +67,7 @@ void Player::render(SDL_Renderer *renderer){
         .h = 120
     };
     
+
     
     SDL_SetRenderDrawColor(renderer, 255,255,255,255);
     SDL_RenderFillRect(renderer, &rect);

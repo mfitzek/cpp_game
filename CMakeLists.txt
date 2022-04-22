@@ -20,6 +20,7 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 FILE(GLOB src_files 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/projectiles/*.cpp"
 )
 
 

@@ -19,6 +19,9 @@ private:
     float width = 75.f;
     float height = 130.f;
 
+
+    bool is_falling();
+
 public:
     Player(float x, float y);
 

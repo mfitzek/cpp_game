@@ -36,3 +36,11 @@ void Input::GetMouseCoords(int &x, int &y){
     x = mouse_x;
     y = mouse_y;
 }
+
+
+void Input::SetMouseBtn(uint8_t btn, bool pressed){
+    mouse_btn[btn] = pressed;
+}
+bool Input::GetMouseBtn(uint8_t btn){
+    return mouse_btn[btn];
+}
