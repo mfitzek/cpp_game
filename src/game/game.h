@@ -1,10 +1,15 @@
 #pragma once
 
 #include <memory>
-#include "window.h"
-
+#include <vector>
 
 #include <SDL.h>
+
+#include "window.h"
+#include "entity.h"
+#include "player.h"
+#include "input.h"
+
 
 class Game
 {
@@ -12,12 +17,19 @@ private:
     bool running = false;
     std::unique_ptr<Window> window;
 
+    const int TARGET_FPS = 120;
+    const int TICK_RATE = 20;
+
+    std::vector<std::shared_ptr<Entity>> entities;
+    std::shared_ptr<Player> player;
+
 public:
     Game();
     ~Game();
     void init();   // initialize window, ..
-    void loop();   // loop every delta time
+    void tick();
+    void update(float delta);   // loop every delta time
     void render(); // render window
-    void handle_events();
+    void handle_events(SDL_Event);
     void run(); // run game
 };

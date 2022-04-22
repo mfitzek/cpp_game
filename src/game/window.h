@@ -15,6 +15,7 @@ public:
 
     void Clear();
 
+    SDL_Renderer* get_renderer();
 
     Window();
     ~Window();

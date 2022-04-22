@@ -1,18 +1,23 @@
 #include "window.h"
 
+#include <iostream>
 Window::Window()
+
+
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+        std::cout << "error initializing SDL: " <<  SDL_GetError() << std::endl;
+    }
 
     window = SDL_CreateWindow(
         "SDL2Test",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        640,
-        480,
+        1280,
+        720,
         0);
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     Clear();
 }
 
@@ -30,4 +35,8 @@ void Window::Clear(){
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
+}
+
+SDL_Renderer* Window::get_renderer(){
+    return this->renderer;
 }
