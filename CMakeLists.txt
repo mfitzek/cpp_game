@@ -21,6 +21,7 @@ FILE(GLOB src_files
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/projectiles/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/map/*.cpp"
 )
 
 
@@ -28,14 +29,17 @@ FILE(GLOB src_files
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/sdl2)
 
 set(SDL2_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2)
-
 find_package(SDL2 REQUIRED)
 
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS})
+set(SDL2_IMAGE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2_image)
+find_package(SDL2_image REQUIRED)
+
+include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+
 
 add_executable(${PROJECT_NAME} ${src_files})
 
-target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} )
+target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} )
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -v)
 
