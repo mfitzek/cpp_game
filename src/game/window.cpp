@@ -40,3 +40,10 @@ void Window::Clear(){
 SDL_Renderer* Window::get_renderer(){
     return this->renderer;
 }
+
+
+void Window::SetResolution(unsigned int width, unsigned int height){
+    this->width = width;
+    this->height = height;
+
+}
