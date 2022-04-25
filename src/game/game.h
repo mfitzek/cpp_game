@@ -15,7 +15,6 @@ class Game
 {
 private:
     bool running = false;
-    std::unique_ptr<Window> window;
 
     const int TARGET_FPS = 120;
     const int TICK_RATE = 20;

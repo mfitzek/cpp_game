@@ -9,14 +9,8 @@ Game::Game()
 {
 }
 
-Game::~Game()
-{
-    window.release();
-}
-
 void Game::init()
 {
-    window = std::make_unique<Window>();
     player = std::make_shared<Player>(100, 200);
     entities.push_back(player);
 }
@@ -105,8 +99,8 @@ void Game::handle_events(SDL_Event event)
 
 void Game::render()
 {
-    window->Clear();
-    auto render = window->get_renderer();
+    Window::Instance().Clear();
+    auto render = Window::Instance().get_renderer();
     for (auto e : entities)
     {
         e->render(render);

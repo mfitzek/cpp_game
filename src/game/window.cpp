@@ -47,3 +47,11 @@ void Window::SetResolution(unsigned int width, unsigned int height){
     this->height = height;
 
 }
+
+
+Window& Window::Instance(){
+    return s_instance;
+}
+
+
+Window Window::s_instance;

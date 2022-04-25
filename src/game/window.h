@@ -14,6 +14,10 @@ private:
     unsigned int height = 0;
     bool fullscreen = false;
 
+    Window();
+    ~Window();
+    static Window s_instance;
+
 
 public:
 
@@ -25,8 +29,7 @@ public:
     unsigned int GetWidth();
     unsigned int GetHeight();
 
-    Window();
-    ~Window();
+    static Window& Instance();
 
 };
 
