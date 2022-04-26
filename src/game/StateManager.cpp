@@ -14,3 +14,13 @@ StateManager& StateManager::Get(){
 StateManager::StateManager(){
     
 }
+
+
+void StateManager::SetWindow(shared_ptr<Window> window){
+    this->window = window;
+}
+
+
+shared_ptr<Window> StateManager::GetWindow(){
+    return this->window;
+}

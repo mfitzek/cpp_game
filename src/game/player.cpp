@@ -14,7 +14,6 @@ Player::Player(float x, float y){
 
 
 
-
 void Player::update(float delta){
 
     if(Input::Get().GetKeyDown(SDLK_w)){
@@ -67,7 +66,7 @@ void Player::render(){
         .h = 120
     };
     
-    auto renderer = Window::Instance().get_renderer();
+    auto renderer = StateManager::Get().GetWindow()->get_renderer();
 
     
     SDL_SetRenderDrawColor(renderer, 255,255,255,255);

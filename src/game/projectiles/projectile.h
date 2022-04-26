@@ -7,6 +7,7 @@
 #include "../window.h"
 
 
+
 class Projectile: public Entity{
 
     float velocity_x;

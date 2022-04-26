@@ -13,13 +13,12 @@ private:
     unsigned int height = 0;
     bool fullscreen = false;
 
-    Window();
-    ~Window();
-
-    static Window s_instance;
 
 
 public:
+
+    Window();
+    ~Window();
 
     void Clear();
 
@@ -28,10 +27,6 @@ public:
     void SetResolution(unsigned int width, unsigned int height);
     unsigned int GetWidth();
     unsigned int GetHeight();
-
-    static Window& Instance();
-
-    static void DestroyWindow();
 };
 
 

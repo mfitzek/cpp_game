@@ -9,6 +9,7 @@
 #include "entity.h"
 #include "player.h"
 #include "input.h"
+#include "StateManager.h"
 
 
 class Game
@@ -21,6 +22,7 @@ private:
 
     std::vector<std::shared_ptr<Entity>> entities;
     std::shared_ptr<Player> player;
+    std::shared_ptr<Window> window;
 
 public:
     Game();

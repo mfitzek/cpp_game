@@ -10,13 +10,16 @@ Game::Game()
 }
 
 Game::~Game(){
-    Window::DestroyWindow();
+   // Window::DestroyWindow();
 }
 
 void Game::init()
 {
+    window = std::make_shared<Window>();
     player = std::make_shared<Player>(100, 200);
     entities.push_back(player);
+    StateManager::Get().SetWindow(window);
+
 }
 
 void Game::run()
@@ -103,8 +106,8 @@ void Game::handle_events(SDL_Event event)
 
 void Game::render()
 {
-    Window::Instance().Clear();
-    auto render = Window::Instance().get_renderer();
+    window->Clear();
+    auto render = window->get_renderer();
     for (auto e : entities)
     {
         e->render();

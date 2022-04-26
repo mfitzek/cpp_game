@@ -2,7 +2,8 @@
 
 
 #include <SDL.h>
-
+#include <memory>
+#include "window.h"
 
 class Entity {
     protected:

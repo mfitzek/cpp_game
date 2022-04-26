@@ -1,13 +1,17 @@
 #pragma once
 
 
-#include "entity.h"
+#include <memory>
 #include <SDL.h>
+
+#include "entity.h"
 #include "window.h"
-
 #include "input.h"
+#include "StateManager.h"
 
 
+
+class StateManager;
 
 class Player: public Entity{
 

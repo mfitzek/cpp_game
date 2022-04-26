@@ -1,9 +1,8 @@
 #include "window.h"
 
 #include <iostream>
+
 Window::Window()
-
-
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cout << "error initializing SDL: " <<  SDL_GetError() << std::endl;
@@ -48,15 +47,3 @@ void Window::SetResolution(unsigned int width, unsigned int height){
 
 }
 
-
-Window& Window::Instance(){
-    return s_instance;
-}
-
-
-Window Window::s_instance;
-
-
-void Window::DestroyWindow(){
-    delete &s_instance;
-}
