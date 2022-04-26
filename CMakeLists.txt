@@ -3,7 +3,7 @@ project(space_arena)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED On)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address ")
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
@@ -41,7 +41,7 @@ add_executable(${PROJECT_NAME} ${src_files})
 
 target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} )
 
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -v)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
 
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

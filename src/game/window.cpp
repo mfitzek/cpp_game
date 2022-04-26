@@ -22,11 +22,12 @@ Window::Window()
 
 Window::~Window()
 {
+    SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
-    free(window);
-    free(renderer);
+    //free(renderer);
+   // free(window);
 }
 
 
