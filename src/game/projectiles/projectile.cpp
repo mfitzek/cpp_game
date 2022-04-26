@@ -19,7 +19,7 @@ void Projectile::update(float delta){
     this->y += (velocity_y*delta);
 } 
 
-void Projectile::render(SDL_Renderer* renderer){
+void Projectile::render(){
     
 }
 

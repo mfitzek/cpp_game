@@ -58,7 +58,7 @@ void Player::jump(){
     this->y_velocity = -500.f;
 }
 
-void Player::render(SDL_Renderer *renderer){
+void Player::render(){
 
     SDL_Rect rect{
         .x = (int)this->x,
@@ -67,6 +67,7 @@ void Player::render(SDL_Renderer *renderer){
         .h = 120
     };
     
+    auto renderer = Window::Instance().get_renderer();
 
     
     SDL_SetRenderDrawColor(renderer, 255,255,255,255);

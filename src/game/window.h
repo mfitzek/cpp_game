@@ -3,7 +3,6 @@
 #include <SDL.h>
 
 
-
 class Window{
 
 private:
@@ -16,6 +15,7 @@ private:
 
     Window();
     ~Window();
+
     static Window s_instance;
 
 
@@ -31,6 +31,7 @@ public:
 
     static Window& Instance();
 
+    static void DestroyWindow();
 };
 
 

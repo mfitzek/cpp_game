@@ -55,3 +55,8 @@ Window& Window::Instance(){
 
 
 Window Window::s_instance;
+
+
+void Window::DestroyWindow(){
+    delete &s_instance;
+}

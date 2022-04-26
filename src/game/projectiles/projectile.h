@@ -4,6 +4,7 @@
 #include "../entity.h"
 
 #include <SDL.h>
+#include "../window.h"
 
 
 class Projectile: public Entity{
@@ -17,6 +18,6 @@ public:
 
     void update(float delta) override;
     void tick() override;
-    void render(SDL_Renderer* renderer) override; 
+    void render() override; 
 
 };

@@ -3,6 +3,7 @@
 
 #include "entity.h"
 #include <SDL.h>
+#include "window.h"
 
 #include "input.h"
 
@@ -26,7 +27,7 @@ public:
     Player(float x, float y);
 
     void update(float delta) override;
-    void render(SDL_Renderer *renderer) override;
+    void render() override;
     void tick() override;
 
     void jump();

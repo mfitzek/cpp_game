@@ -9,6 +9,10 @@ Game::Game()
 {
 }
 
+Game::~Game(){
+    Window::DestroyWindow();
+}
+
 void Game::init()
 {
     player = std::make_shared<Player>(100, 200);
@@ -22,7 +26,7 @@ void Game::run()
 
     uint32_t last_time = 0,last_tick=0, current_time;
 
-    const int TARGET_TICK = 60;
+    const int TARGET_TICK = 40;
 
     while (running)
     {   
@@ -103,7 +107,7 @@ void Game::render()
     auto render = Window::Instance().get_renderer();
     for (auto e : entities)
     {
-        e->render(render);
+        e->render();
     }
 
     int x;

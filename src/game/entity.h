@@ -13,7 +13,7 @@ class Entity {
     public:
 
     virtual void update(float delta) = 0;
-    virtual void render(SDL_Renderer *renderer) = 0;
+    virtual void render() = 0;
     virtual void tick() = 0;
     
 
