@@ -14,16 +14,19 @@ Input& Input::Get()
 
 bool Input::GetKeyDown(SDL_Keycode key)
 {
-    return keys_down[key];
+    if(key_map.contains(key)){
+        return key_map[key];
+    }
+    return false;
 }
 
 void Input::SetKeyDown(SDL_Keycode key)
 {
-    keys_down[key] = true;
+   key_map.insert_or_assign(key, true);
 }
 void Input::SetKeyUp(SDL_Keycode key)
 {
-    keys_down[key] = false;
+     key_map.insert_or_assign(key, false);
 }
 
 void Input::SetMouseCoords(int x, int y){

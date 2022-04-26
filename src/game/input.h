@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 
 #include <SDL.h>
 
@@ -24,9 +25,11 @@ class Input {
     private:
         static Input s_Instance;
 
+        std::map<SDL_Keycode, bool> key_map;
+
         bool mouse_btn[5];
         int mouse_x=0, mouse_y=0;
-        bool keys_down[322]; 
+        
         Input();
 
 };
