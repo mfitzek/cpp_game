@@ -30,6 +30,11 @@ void Player::update(float delta){
         jump();
     }
 
+
+    if(Input::Get().GetKeyDown(SDLK_p)){
+        next_remove = true;
+    }
+
     if(this->y + (y_velocity* delta) < (720-height)){
         this->y += (y_velocity* delta);
     }else{
@@ -49,6 +54,16 @@ void Player::gravity(){
 }
 
 void Player::tick(){
+    if(Input::Get().GetMouseBtn(0)){
+        int x,y;
+
+        Input::Get().GetMouseCoords(x,y);
+        
+
+        auto p = std::make_shared<Projectile>(this->x, this->y)
+                
+    }
+
     gravity();
 }
 

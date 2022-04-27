@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED On)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
 if (UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address ")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer -fsanitize=address")
 endif(UNIX)
 
 

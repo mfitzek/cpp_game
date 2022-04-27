@@ -8,6 +8,7 @@
 #include "window.h"
 #include "input.h"
 #include "StateManager.h"
+#include "projectiles/projectile.h"
 
 
 
@@ -19,6 +20,7 @@ private:
 
     float x_speed = 180.f;
 
+    float x_velocity = 0.f;
     float y_velocity = 0.f;
 
     float width = 75.f;

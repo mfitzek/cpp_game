@@ -5,6 +5,7 @@
 
 #include <SDL.h>
 #include "../window.h"
+#include "../StateManager.h"
 
 
 

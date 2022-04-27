@@ -20,11 +20,24 @@ void Projectile::update(float delta){
 } 
 
 void Projectile::render(){
+    auto renderer = StateManager::Get().GetWindow()->get_renderer();
+
+    SDL_Rect rect;
+    rect.x = this->x - 5;
+    rect.y= this->y - 5;
+    rect.w = 10;
+    rect.h = 10;
+
+    SDL_SetRenderDrawColor(renderer, 255,255,255,255);
+    SDL_RenderFillRect(renderer, &rect);
     
 }
 
 void Projectile::tick(){
 
+    if(x < 0 || y < 0 || x > StateManager::Get().GetWindow()->GetWidth() || y > StateManager::Get().GetWindow()->GetHeight()){
+        next_remove = true;
+    }
 }
 
 

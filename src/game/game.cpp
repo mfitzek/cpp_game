@@ -16,8 +16,7 @@ Game::~Game(){
 void Game::init()
 {
     window = std::make_shared<Window>();
-    player = std::make_shared<Player>(100, 200);
-    entities.push_back(player);
+
     StateManager::Get().SetWindow(window);
 
 }
@@ -29,7 +28,6 @@ void Game::run()
 
     uint32_t last_time = 0,last_tick=0, current_time;
 
-    const int TARGET_TICK = 40;
 
     while (running)
     {   
@@ -39,7 +37,7 @@ void Game::run()
 
         current_time = SDL_GetTicks();
 
-        if((current_time-last_tick) >= (1000/TARGET_TICK)){
+        if((current_time-last_tick) >= (1000/TICK_RATE)){
             tick();
             last_tick = current_time;
         }
@@ -59,18 +57,12 @@ void Game::run()
 
 
 void Game::tick(){
-    for (auto e : entities)
-    {
-        e->tick();
-    }
+   StateManager::Get().Tick();
 }
 
 void Game::update(float delta)
 {
-    for (auto e : entities)
-    {
-        e->update(delta);
-    }
+    StateManager::Get().Update(delta);
 }
 
 void Game::handle_events(SDL_Event event)
@@ -108,25 +100,23 @@ void Game::render()
 {
     window->Clear();
     auto render = window->get_renderer();
-    for (auto e : entities)
-    {
-        e->render();
-    }
 
-    int x;
-    int y;
+    StateManager::Get().Render();
 
-    Input::Get().GetMouseCoords(x,y);
+    // int x;
+    // int y;
 
-    SDL_Rect rect {
-        .x = x-5,
-        .y = y-5,
-        .w = 10,
-        .h = 10
-    };
+    // Input::Get().GetMouseCoords(x,y);
 
-    SDL_SetRenderDrawColor(render, 255,255,255,255);
-    SDL_RenderFillRect(render, &rect);
+    // SDL_Rect rect {
+    //     .x = x-5,
+    //     .y = y-5,
+    //     .w = 10,
+    //     .h = 10
+    // };
+
+    // SDL_SetRenderDrawColor(render, 255,255,255,255);
+    // SDL_RenderFillRect(render, &rect);
 
 
     SDL_RenderPresent(render);

@@ -20,8 +20,6 @@ private:
     const int TARGET_FPS = 120;
     const int TICK_RATE = 20;
 
-    std::vector<std::shared_ptr<Entity>> entities;
-    std::shared_ptr<Player> player;
     std::shared_ptr<Window> window;
 
 public:
