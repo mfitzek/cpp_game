@@ -98,26 +98,13 @@ void Game::handle_events(SDL_Event event)
 
 void Game::render()
 {
+    // Clear screen
     window->Clear();
-    auto render = window->get_renderer();
 
+    //Render objects
     StateManager::Get().Render();
 
-    // int x;
-    // int y;
+    // Swap buffer
+    window->Render();
 
-    // Input::Get().GetMouseCoords(x,y);
-
-    // SDL_Rect rect {
-    //     .x = x-5,
-    //     .y = y-5,
-    //     .w = 10,
-    //     .h = 10
-    // };
-
-    // SDL_SetRenderDrawColor(render, 255,255,255,255);
-    // SDL_RenderFillRect(render, &rect);
-
-
-    SDL_RenderPresent(render);
 }
