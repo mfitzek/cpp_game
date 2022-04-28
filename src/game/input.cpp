@@ -42,8 +42,12 @@ void Input::GetMouseCoords(int &x, int &y){
 
 
 void Input::SetMouseBtn(uint8_t btn, bool pressed){
-    mouse_btn[btn] = pressed;
+    mouse_btn.insert_or_assign(btn, pressed);
 }
+
 bool Input::GetMouseBtn(uint8_t btn){
-    return mouse_btn[btn];
+    if(mouse_btn.contains(btn)){
+        return mouse_btn[btn];
+    }
+    return false;
 }

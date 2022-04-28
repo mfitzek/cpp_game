@@ -35,7 +35,7 @@ void Projectile::render(){
 
 void Projectile::tick(){
 
-    if(x < 0 || y < 0 || x > StateManager::Get().GetWindow()->GetWidth() || y > StateManager::Get().GetWindow()->GetHeight()){
+    if(x < 0 || y < 0 || x > (float)StateManager::Get().GetWindow()->GetWidth() || y > (float)StateManager::Get().GetWindow()->GetHeight()){
         next_remove = true;
     }
 }

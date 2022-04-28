@@ -10,13 +10,23 @@
 #include "StateManager.h"
 #include "projectiles/projectile.h"
 
-
+#include <stdint.h>
+#include <cmath>
 
 class StateManager;
+
+struct stats {
+    float attack_speed = 1.f;
+};
+
+struct state{
+    uint32_t last_shot = 0;
+};
 
 class Player: public Entity{
 
 private:
+
 
     float x_speed = 180.f;
 
@@ -26,7 +36,9 @@ private:
     float width = 75.f;
     float height = 130.f;
 
-
+    stats stats;
+    state state;
+    
     bool is_falling();
 
 public:

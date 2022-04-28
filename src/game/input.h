@@ -26,8 +26,7 @@ class Input {
         static Input s_Instance;
 
         std::map<SDL_Keycode, bool> key_map;
-
-        bool mouse_btn[5];
+        std::map<uint8_t, bool> mouse_btn;
         int mouse_x=0, mouse_y=0;
         
         Input();
