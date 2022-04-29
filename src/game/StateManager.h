@@ -25,10 +25,8 @@ class StateManager {
         size_t ticks = 0;
 
         vector<shared_ptr<Entity>> append_entity;
-
         vector<shared_ptr<Entity>> entities;
         shared_ptr<Player> player;
-        shared_ptr<Window> window;
 
         static StateManager s_instance;
         StateManager();
@@ -36,9 +34,6 @@ class StateManager {
     public:
 
         void AddEntity(shared_ptr<Entity> entity);
-
-        void SetWindow(shared_ptr<Window> window);
-        shared_ptr<Window> GetWindow();
 
         void Update(float delta);
         void Tick();

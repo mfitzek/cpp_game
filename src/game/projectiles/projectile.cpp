@@ -20,7 +20,7 @@ void Projectile::update(float delta){
 } 
 
 void Projectile::render(){
-    auto renderer = StateManager::Get().GetWindow()->get_renderer();
+    auto renderer = Window::Get().get_renderer();
 
     SDL_Rect rect;
     rect.x = this->x - 5;
@@ -35,7 +35,7 @@ void Projectile::render(){
 
 void Projectile::tick(){
 
-    if(x < 0 || y < 0 || x > (float)StateManager::Get().GetWindow()->GetWidth() || y > (float)StateManager::Get().GetWindow()->GetHeight()){
+    if(x < 0 || y < 0 || x > (float)Window::Get().GetWidth() || y > (float)Window::Get().GetHeight()){
         next_remove = true;
     }
 }

@@ -15,9 +15,7 @@ Game::~Game(){
 
 void Game::init()
 {
-    window = std::make_shared<Window>();
 
-    StateManager::Get().SetWindow(window);
 
 }
 
@@ -98,13 +96,15 @@ void Game::handle_events(SDL_Event event)
 
 void Game::render()
 {
+    Window& window = Window::Get();
+    
     // Clear screen
-    window->Clear();
+    window.Clear();
 
     //Render objects
     StateManager::Get().Render();
 
     // Swap buffer
-    window->Render();
+    window.Render();
 
 }

@@ -20,7 +20,6 @@ private:
     const int TARGET_FPS = 500;
     const int TICK_RATE = 60;
 
-    std::shared_ptr<Window> window;
 
 public:
     Game();

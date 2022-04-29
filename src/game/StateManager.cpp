@@ -17,16 +17,6 @@ StateManager::StateManager(){
 }
 
 
-void StateManager::SetWindow(shared_ptr<Window> window){
-    this->window = window;
-}
-
-
-shared_ptr<Window> StateManager::GetWindow(){
-    return this->window;
-}
-
-
 void StateManager::Update(float delta){
     for(auto e: entities){
         e->update(delta);

@@ -67,3 +67,10 @@ int Window::GetWidth(){
 int Window::GetHeight(){
     return SDL_GetWindowSurface(window)->h;
 }
+
+
+Window& Window::Get(){
+    return s_instance;
+}
+
+Window Window::s_instance;

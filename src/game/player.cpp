@@ -15,13 +15,13 @@ void Player::update(float delta)
     //     next_remove = true;
     // }
 
-    if (this->y + (y_velocity * delta) <= (StateManager::Get().GetWindow()->GetHeight()))
+    if (this->y + (y_velocity * delta) <= (Window::Get().GetHeight()))
     {
         this->y += (y_velocity * delta);
     }
     else
     {
-        this->y = StateManager::Get().GetWindow()->GetHeight();
+        this->y = Window::Get().GetHeight();
     }
 
     this->x += x_velocity * stats.movement_speed * delta;
@@ -29,7 +29,7 @@ void Player::update(float delta)
 
 bool Player::is_falling()
 {
-    return this->y < (StateManager::Get().GetWindow()->GetHeight());
+    return this->y < (Window::Get().GetHeight());
 }
 
 void Player::gravity()
@@ -95,7 +95,7 @@ void Player::render()
 {
 
 
-    auto window = StateManager::Get().GetWindow();
+    Window& window = Window::Get();
 
     SDL_Rect rect{
         .x = (int)this->x,
@@ -103,7 +103,7 @@ void Player::render()
         .w = (int)this->width,
         .h = (int)this->height};
 
-    auto renderer = window->get_renderer();
+    auto renderer = window.get_renderer();
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderFillRect(renderer, &rect);
