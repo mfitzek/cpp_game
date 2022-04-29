@@ -10,53 +10,49 @@ Player::Player(float x, float y)
 
 void Player::update(float delta)
 {
+    // if (Input::Get().GetKeyDown(SDLK_p))
+    // {
+    //     next_remove = true;
+    // }
 
-    if (Input::Get().GetKeyDown(SDLK_w))
-    {
-        jump();
-    }
-    if (Input::Get().GetKeyDown(SDLK_a))
-    {
-        this->x -= x_speed * delta;
-    }
-    if (Input::Get().GetKeyDown(SDLK_d))
-    {
-        this->x += x_speed * delta;
-    }
-
-    if (Input::Get().GetKeyDown(SDLK_SPACE))
-    {
-        jump();
-    }
-
-    if (Input::Get().GetKeyDown(SDLK_p))
-    {
-        next_remove = true;
-    }
-
-    if (this->y + (y_velocity * delta) < (720 - height))
+    if (this->y + (y_velocity * delta) <= (StateManager::Get().GetWindow()->GetHeight()))
     {
         this->y += (y_velocity * delta);
     }
     else
     {
-        this->y = (720 - height);
+        this->y = StateManager::Get().GetWindow()->GetHeight();
     }
+
+    this->x += x_velocity * stats.movement_speed * delta;
 }
 
 bool Player::is_falling()
 {
-    return this->y < (720 - height);
+    return this->y < (StateManager::Get().GetWindow()->GetHeight());
 }
 
 void Player::gravity()
 {
-
-    this->y_velocity += 20.f;
+    if(is_falling())
+        this->y_velocity += GRAVITY_FALL;
 }
 
 void Player::tick()
 {
+    handle_input();
+    gravity();
+}
+
+void Player::handle_input()
+{
+    if (Input::Get().GetKeyDown(SDLK_a) || Input::Get().GetKeyDown(SDLK_d))
+    {
+        this->x_velocity = Input::Get().GetKeyDown(SDLK_a) ? -X_BASE_SPEED : X_BASE_SPEED;
+    }else{
+        this->x_velocity = 0;
+    }
+
     if (Input::Get().GetMouseBtn(SDL_BUTTON_LEFT))
     {
         if ((StateManager::Get().GetTicks() - state.last_shot) >= 5)
@@ -75,7 +71,7 @@ void Player::tick()
             float x_dir = x_diff / dist;
             float y_dir = y_diff / dist;
 
-            std::cout << x_dir << " " << y_dir << std::endl;
+           // std::cout << x_dir << " " << y_dir << std::endl;
 
             auto p = std::make_shared<Projectile>(this->x, this->y, x_dir * 200.f, y_dir * 200.f);
 
@@ -83,25 +79,31 @@ void Player::tick()
         }
     }
 
-    gravity();
+    if (Input::Get().GetKeyDown(SDLK_SPACE) || Input::Get().GetKeyDown(SDLK_w)  )
+    {
+        jump();
+    }
 }
 
 void Player::jump()
 {
     if (!is_falling())
-        this->y_velocity = -500.f;
+        this->y_velocity -= JUMP_VEL;
 }
 
 void Player::render()
 {
 
+
+    auto window = StateManager::Get().GetWindow();
+
     SDL_Rect rect{
         .x = (int)this->x,
-        .y = (int)this->y,
-        .w = 50,
-        .h = 120};
+        .y = (int)this->y - (int)this->height,
+        .w = (int)this->width,
+        .h = (int)this->height};
 
-    auto renderer = StateManager::Get().GetWindow()->get_renderer();
+    auto renderer = window->get_renderer();
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderFillRect(renderer, &rect);

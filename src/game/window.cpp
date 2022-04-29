@@ -8,15 +8,19 @@ Window::Window()
         std::cout << "error initializing SDL: " <<  SDL_GetError() << std::endl;
     }
 
+    const int WIDTH = 1600;
+    const int HEIGHT = 900;
+
+
     window = SDL_CreateWindow(
         "SDL2Test",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        1280,
-        720,
+        WIDTH,
+        HEIGHT,
         0);
-    width = 1280;
-    height = 720;
+    width = WIDTH;
+    height = HEIGHT;
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     Clear();
@@ -56,10 +60,10 @@ void Window::SetResolution(unsigned int width, unsigned int height){
 
 }
 
-unsigned int Window::GetWidth(){
-    return width;
+int Window::GetWidth(){
+    return SDL_GetWindowSurface(window)->w;
 }
 
-unsigned int Window::GetHeight(){
-    return height;
+int Window::GetHeight(){
+    return SDL_GetWindowSurface(window)->h;
 }

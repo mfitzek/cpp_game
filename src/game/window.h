@@ -26,8 +26,8 @@ public:
     SDL_Renderer* get_renderer();
 
     void SetResolution(unsigned int width, unsigned int height);
-    unsigned int GetWidth();
-    unsigned int GetHeight();
+    int GetWidth();
+    int GetHeight();
 };
 
 

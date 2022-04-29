@@ -17,8 +17,8 @@ class Game
 private:
     bool running = false;
 
-    const int TARGET_FPS = 120;
-    const int TICK_RATE = 20;
+    const int TARGET_FPS = 500;
+    const int TICK_RATE = 60;
 
     std::shared_ptr<Window> window;
 
