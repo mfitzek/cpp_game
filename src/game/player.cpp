@@ -26,10 +26,13 @@ void Player::update(float delta)
 bool Player::is_falling()
 {
 
-    Line l (20, Window::Get().GetHeight()-20, Window::Get().GetWidth()-20, Window::Get().GetHeight()-20);
+    //Line l (20, Window::Get().GetHeight()-20, Window::Get().GetWidth()-20, Window::Get().GetHeight()-20);
 
 
-    return !GetBounds().CheckCollision(l);
+    //return !GetBounds().CheckCollision(l);
+
+
+    return this->y <( Window::Get().GetHeight() - this->GetActualHeight());
 }
 
 void Player::gravity()
