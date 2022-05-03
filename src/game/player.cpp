@@ -11,34 +11,38 @@ Player::Player(float x, float y)
 void Player::update(float delta)
 {
 
-    if (this->y + (y_velocity * delta) + this->GetActualHeight() <= (Window::Get().GetHeight()))
-    {
-        this->y += (y_velocity * delta);
-    }
-    else
-    {
-        this->y = Window::Get().GetHeight() - this->GetActualHeight();
-    }
+    // if (this->y + (y_velocity * delta) + this->GetActualHeight() <= (Window::Get().GetHeight()))
+    // {
+    //     this->y += (y_velocity * delta);
+    // }
+    // else
+    // {
+    //     this->y = Window::Get().GetHeight() - this->GetActualHeight();
+    // }
+    
 
+
+    this->y += (y_velocity * delta);
     this->x += x_velocity * stats.movement_speed * delta;
 }
 
 bool Player::is_falling()
 {
+    
+    auto& window = Window::Get();
 
-    //Line l (20, Window::Get().GetHeight()-20, Window::Get().GetWidth()-20, Window::Get().GetHeight()-20);
+    Line l (20, window.GetHeight()-20, window.GetWidth()-20, window.GetHeight()-20);
 
+    return !GetBounds().CheckCollision(l);
 
-    //return !GetBounds().CheckCollision(l);
-
-
-    return this->y <( Window::Get().GetHeight() - this->GetActualHeight());
 }
 
 void Player::gravity()
 {
     if(is_falling())
         this->y_velocity += GRAVITY_FALL;
+    else
+        this->y_velocity = 0;
 }
 
 void Player::tick()
