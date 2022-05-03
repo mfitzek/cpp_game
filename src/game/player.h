@@ -13,6 +13,9 @@
 #include <stdint.h>
 #include <cmath>
 
+#include "collisions/BoundingBox.h"
+#include "collisions/Line.h"
+
 class StateManager;
 
 struct stats {
@@ -39,8 +42,8 @@ private:
     float x_velocity = 0.f;
     float y_velocity = 0.f;
 
-    float width = 50.f;
-    float height = 100.f;
+    float width = 0.03f;
+    float height = 0.1f;
 
     stats stats;
     state state;
@@ -59,5 +62,10 @@ public:
     void jump();
     void gravity();
 
+    int GetActualWidth() const;
+    int GetActualHeight() const;
+
+
+    BoundingBox GetBounds() const;
 
 };

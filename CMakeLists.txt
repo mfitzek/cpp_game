@@ -23,8 +23,13 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 FILE(GLOB src_files 
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/projectiles/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/projectiles/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/map/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/map/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/collisions/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/collisions/*.h"
 )
 
 

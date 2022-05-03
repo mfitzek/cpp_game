@@ -10,18 +10,14 @@ Player::Player(float x, float y)
 
 void Player::update(float delta)
 {
-    // if (Input::Get().GetKeyDown(SDLK_p))
-    // {
-    //     next_remove = true;
-    // }
 
-    if (this->y + (y_velocity * delta) <= (Window::Get().GetHeight()))
+    if (this->y + (y_velocity * delta) + this->GetActualHeight() <= (Window::Get().GetHeight()))
     {
         this->y += (y_velocity * delta);
     }
     else
     {
-        this->y = Window::Get().GetHeight();
+        this->y = Window::Get().GetHeight() - this->GetActualHeight();
     }
 
     this->x += x_velocity * stats.movement_speed * delta;
@@ -29,7 +25,11 @@ void Player::update(float delta)
 
 bool Player::is_falling()
 {
-    return this->y < (Window::Get().GetHeight());
+
+    Line l (20, Window::Get().GetHeight()-20, Window::Get().GetWidth()-20, Window::Get().GetHeight()-20);
+
+
+    return !GetBounds().CheckCollision(l);
 }
 
 void Player::gravity()
@@ -71,7 +71,6 @@ void Player::handle_input()
             float x_dir = x_diff / dist;
             float y_dir = y_diff / dist;
 
-           // std::cout << x_dir << " " << y_dir << std::endl;
 
             auto p = std::make_shared<Projectile>(this->x, this->y, x_dir * 200.f, y_dir * 200.f);
 
@@ -100,11 +99,25 @@ void Player::render()
     SDL_Rect rect{
         .x = (int)this->x,
         .y = (int)this->y - (int)this->height,
-        .w = (int)this->width,
-        .h = (int)this->height};
+        .w = this->GetActualWidth(),
+        .h = this->GetActualHeight()};
 
     auto renderer = window.get_renderer();
 
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderFillRect(renderer, &rect);
+}
+
+
+int Player::GetActualWidth() const{
+    return (int)(this->width * Window::Get().GetWidth());
+}
+int Player::GetActualHeight() const{
+    return (int)(this->height * Window::Get().GetHeight());
+}
+
+
+BoundingBox Player::GetBounds() const {
+    return BoundingBox((int)x, (int)y, GetActualWidth(), GetActualHeight());
 }
