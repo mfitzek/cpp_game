@@ -16,46 +16,50 @@
 #include "collisions/BoundingBox.h"
 #include "collisions/Line.h"
 
+#include "utils/Observer.h"
+
 class StateManager;
 
 struct stats {
-    float attack_speed = 1.f;
-    float movement_speed = 1.f;
-    float jump_height = 1.f;
+    double attack_speed = 1.0;
+    double movement_speed = 1.0;
+    double jump_height = 1.0;
     int max_health = 60;
 };
 
 struct state{
-    uint32_t last_shot = 0;
+    size_t last_shot = 0;
     int current_health = 60;
+    bool is_on_ground = false;
 };
 
 
-const float X_BASE_SPEED = 200.f;
-const float GRAVITY_FALL = 25.f;
-const float JUMP_VEL = 500.f;
+const double X_BASE_SPEED = 0.15;
+const double GRAVITY_FALL = 0.01;
+const double JUMP_VEL = 0.5;
 
-class Player: public Entity{
+class Player: public Entity, public Observer{
 
 private:
 
-    float x_velocity = 0.f;
-    float y_velocity = 0.f;
+    double x_velocity = 0.0;
+    double y_velocity = 0.0;
 
-    float width = 0.03f;
-    float height = 0.1f;
+    double width = 0.03;
+    double height = 0.1;
 
     stats stats;
     state state;
     
-    bool is_falling();
 
 public:
-    Player(float x, float y);
+    Player(double x, double y);
 
-    void update(float delta) override;
+    void update(double delta) override;
     void render() override;
     void tick() override;
+
+    void CheckCollisions();
 
     void handle_input();
 
@@ -67,5 +71,7 @@ public:
 
 
     BoundingBox GetBounds() const;
+
+    void OnUpdate() override;
 
 };

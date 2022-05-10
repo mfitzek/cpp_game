@@ -2,11 +2,11 @@
 
 
 
-BoundingBox::BoundingBox(int x, int y, int width, int height){
+BoundingBox::BoundingBox(double x, double y, double width, double height){
     this->x1 = x;
     this->y1 = y;
     this->x2 = x + width;
-    this->y2 = x + height;
+    this->y2 = y + height;
 }
 
 
@@ -22,6 +22,7 @@ bool BoundingBox::CheckCollision(const Line& line) const{
     bool left = line.CheckCollision(Line(x1, y1, x1, y2));
     bool right = line.CheckCollision(Line(x2, y1, x2, y2));
     bool top = line.CheckCollision(Line(x1, y1, x2, y1));
-    bool bottom = line.CheckCollision(Line(x1, y2, x2, y1));
-    return left | right | top | bottom;
+    bool bottom = line.CheckCollision(Line(x1, y2, x2, y2));
+
+    return (left | right | top | bottom);
 }

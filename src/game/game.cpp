@@ -40,7 +40,7 @@ void Game::run()
             last_tick = current_time;
         }
 
-        float delta = (current_time - last_time) / 1000.f;
+        double delta = (current_time - last_time) / 1000.0;
         update(delta);
 
         last_time = current_time;
@@ -58,7 +58,7 @@ void Game::tick(){
    StateManager::Get().Tick();
 }
 
-void Game::update(float delta)
+void Game::update(double delta)
 {
     StateManager::Get().Update(delta);
 }

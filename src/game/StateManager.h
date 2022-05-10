@@ -35,7 +35,7 @@ class StateManager {
 
         void AddEntity(shared_ptr<Entity> entity);
 
-        void Update(float delta);
+        void Update(double delta);
         void Tick();
         void Render();
         static StateManager& Get();

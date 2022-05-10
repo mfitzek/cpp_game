@@ -30,6 +30,8 @@ FILE(GLOB src_files
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/map/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/collisions/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/collisions/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/utils/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/utils/*.cpp"
 )
 
 

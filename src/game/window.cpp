@@ -18,7 +18,7 @@ Window::Window()
         SDL_WINDOWPOS_UNDEFINED,
         WIDTH,
         HEIGHT,
-        0);
+        SDL_WINDOW_RESIZABLE);
     width = WIDTH;
     height = HEIGHT;
 
@@ -74,3 +74,13 @@ Window& Window::Get(){
 }
 
 Window Window::s_instance;
+
+
+
+
+void Window::Notify(){
+    for(auto obs: observers){
+        if(obs != nullptr)
+            obs->OnUpdate();
+    }
+}

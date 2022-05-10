@@ -26,7 +26,7 @@ public:
     ~Game();
     void init();   // initialize window, ..
     void tick();
-    void update(float delta);   // loop every delta time
+    void update(double delta);   // loop every delta time
     void render(); // render window
     void handle_events(SDL_Event);
     void run(); // run game

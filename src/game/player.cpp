@@ -2,61 +2,49 @@
 
 #include <iostream>
 
-Player::Player(float x, float y)
+Player::Player(double x, double y)
 {
-    this->x = x;
-    this->y = y;
+
+    // Window::Get().Attach(this);
+
+    this->currentPos.x = x;
+    this->currentPos.y = y;
 }
 
-void Player::update(float delta)
+void Player::update(double delta)
 {
-
-    // if (this->y + (y_velocity * delta) + this->GetActualHeight() <= (Window::Get().GetHeight()))
-    // {
-    //     this->y += (y_velocity * delta);
-    // }
-    // else
-    // {
-    //     this->y = Window::Get().GetHeight() - this->GetActualHeight();
-    // }
-    
-
-
-    this->y += (y_velocity * delta);
-    this->x += x_velocity * stats.movement_speed * delta;
-}
-
-bool Player::is_falling()
-{
-    
-    auto& window = Window::Get();
-
-    Line l (20, window.GetHeight()-20, window.GetWidth()-20, window.GetHeight()-20);
-
-    return !GetBounds().CheckCollision(l);
-
+   CheckCollisions();
+    this->currentPos.x += (x_velocity * stats.movement_speed * delta);
+    this->currentPos.y += (y_velocity * delta);
 }
 
 void Player::gravity()
 {
-    if(is_falling())
+    if (!state.is_on_ground)
+    {
         this->y_velocity += GRAVITY_FALL;
+    }
     else
+    {
         this->y_velocity = 0;
+    }
 }
 
 void Player::tick()
 {
     handle_input();
     gravity();
+
 }
 
 void Player::handle_input()
 {
     if (Input::Get().GetKeyDown(SDLK_a) || Input::Get().GetKeyDown(SDLK_d))
     {
-        this->x_velocity = Input::Get().GetKeyDown(SDLK_a) ? -X_BASE_SPEED : X_BASE_SPEED;
-    }else{
+         this->x_velocity = Input::Get().GetKeyDown(SDLK_a) ? -X_BASE_SPEED : X_BASE_SPEED;
+    }
+    else
+    {
         this->x_velocity = 0;
     }
 
@@ -66,65 +54,94 @@ void Player::handle_input()
         {
 
             state.last_shot = StateManager::Get().GetTicks();
-            int x, y;
+            int mouseX, mouseY;
 
-            Input::Get().GetMouseCoords(x, y);
+            Input::Get().GetMouseCoords(mouseX, mouseY);
 
-            float x_diff = (float)x - this->x;
-            float y_diff = (float)y - this->y;
+            double mx = (double) mouseX / (double)Window::Get().GetWidth();
+            double my = (double) mouseY / (double)Window::Get().GetHeight();
 
-            float dist = sqrt(pow(x_diff, 2.f) + pow(y_diff, 2.f));
+            double x_diff = mx - this->currentPos.x;
+            double y_diff = my - this->currentPos.y;
 
-            float x_dir = x_diff / dist;
-            float y_dir = y_diff / dist;
+            double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
 
+            double x_dir = x_diff / dist;
+            double y_dir = y_diff / dist;
 
-            auto p = std::make_shared<Projectile>(this->x, this->y, x_dir * 200.f, y_dir * 200.f);
+            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir*0.5);
 
             StateManager::Get().AddEntity(p);
         }
     }
 
-    if (Input::Get().GetKeyDown(SDLK_SPACE) || Input::Get().GetKeyDown(SDLK_w)  )
+    if (Input::Get().GetKeyDown(SDLK_SPACE) || Input::Get().GetKeyDown(SDLK_w))
     {
         jump();
     }
+
+
+
 }
 
 void Player::jump()
 {
-    if (!is_falling())
+    if (state.is_on_ground)
+    {
         this->y_velocity -= JUMP_VEL;
+        state.is_on_ground = false;
+    }
+}
+
+void Player::CheckCollisions()
+{
+    Line l(0.1, 0.9, 0.9, 0.9);
+
+    if (GetBounds().CheckCollision(l))
+    {
+        state.is_on_ground = true;
+        y_velocity = 0;
+        currentPos.y = l.y1 - this->height - 0.0001;
+    }
+    else
+    {
+        state.is_on_ground = false;
+    }
 }
 
 void Player::render()
 {
-
-
-    Window& window = Window::Get();
+    Window &window = Window::Get();
 
     SDL_Rect rect{
-        .x = (int)this->x,
-        .y = (int)this->y - (int)this->height,
+        .x = (int)(this->currentPos.x * window.GetWidth()),
+        .y = (int)(this->currentPos.y * window.GetHeight()),
         .w = this->GetActualWidth(),
         .h = this->GetActualHeight()};
 
     auto renderer = window.get_renderer();
-
-
+    
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderFillRect(renderer, &rect);
+
+
+}
+
+int Player::GetActualWidth() const
+{
+    return this->width * Window::Get().GetWidth();
+}
+int Player::GetActualHeight() const
+{
+    return this->height * Window::Get().GetHeight();
+}
+
+BoundingBox Player::GetBounds() const
+{
+    return BoundingBox(currentPos.x, currentPos.y,  width, height);
 }
 
 
-int Player::GetActualWidth() const{
-    return (int)(this->width * Window::Get().GetWidth());
-}
-int Player::GetActualHeight() const{
-    return (int)(this->height * Window::Get().GetHeight());
-}
-
-
-BoundingBox Player::GetBounds() const {
-    return BoundingBox((int)x, (int)y, GetActualWidth(), GetActualHeight());
+void Player::OnUpdate()
+{
 }

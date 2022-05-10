@@ -11,14 +11,14 @@
 
 class Projectile: public Entity{
 
-    float velocity_x;
-    float velocity_y;
+    double velocity_x;
+    double velocity_y;
 
 public:
 
-    Projectile(float x, float y, float vel_x, float vel_y);
+    Projectile(double x, double y, double vel_x, double vel_y);
 
-    void update(float delta) override;
+    void update(double delta) override;
     void tick() override;
     void render() override; 
 

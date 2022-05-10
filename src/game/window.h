@@ -2,8 +2,10 @@
 
 #include <SDL.h>
 
+#include "utils/Observer.h"
 
-class Window{
+
+class Window: public Subject{
 
 private:
     SDL_Window *window;
@@ -31,6 +33,9 @@ public:
     void SetResolution(unsigned int width, unsigned int height);
     int GetWidth();
     int GetHeight();
+
+
+    void Notify() override;
 };
 
 

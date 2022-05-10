@@ -12,12 +12,12 @@ StateManager& StateManager::Get(){
 
 
 StateManager::StateManager(){
-    player = std::make_shared<Player>(100, 200);
+    player = std::make_shared<Player>(0.5, 0.5);
     entities.push_back(player);
 }
 
 
-void StateManager::Update(float delta){
+void StateManager::Update(double delta){
     for(auto e: entities){
         e->update(delta);
     }
