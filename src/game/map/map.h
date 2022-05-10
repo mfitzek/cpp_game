@@ -4,19 +4,13 @@
 
 #include "../window.h"
 #include <vector>
+#include "../collisions/Line.h"
 
-
-struct line{
-    int x1;
-    int y1;
-    int x2;
-    int y2;
-};
 
 
 class Map {
 
-    
+    std::vector<Line> map;
 
     void render();
 

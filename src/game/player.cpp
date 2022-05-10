@@ -96,8 +96,9 @@ void Player::jump()
 void Player::CheckCollisions()
 {
     Line l(0.1, 0.9, 0.9, 0.9);
+    auto bounds = GetBounds();
 
-    if (GetBounds().CheckCollision(l))
+    if (bounds.CheckCollision(l))
     {
         state.is_on_ground = true;
         y_velocity = 0;
@@ -105,7 +106,12 @@ void Player::CheckCollisions()
     }
     else
     {
-        state.is_on_ground = false;
+        bounds.y1 += 0.0001;
+        bounds.y2 += 0.0001;
+        if(!bounds.CheckCollision(l)){
+
+            state.is_on_ground = false;
+        }
     }
 }
 
