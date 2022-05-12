@@ -21,7 +21,7 @@
 class StateManager;
 
 struct stats {
-    double attack_speed = 1.0;
+    double attack_speed = 3.0;
     double movement_speed = 1.0;
     double jump_height = 1.0;
     int max_health = 60;
@@ -68,6 +68,9 @@ public:
 
     void jump();
     void gravity();
+
+
+    void shoot();
 
 
     void OnUpdate() override;

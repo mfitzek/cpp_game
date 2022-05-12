@@ -95,29 +95,7 @@ void Player::handle_input()
 
     if (Input::Get().GetMouseBtn(SDL_BUTTON_LEFT))
     {
-        if ((StateManager::Get().GetTicks() - state.last_shot) >= 5)
-        {
-
-            state.last_shot = StateManager::Get().GetTicks();
-            int mouseX, mouseY;
-
-            Input::Get().GetMouseCoords(mouseX, mouseY);
-
-            double mx = (double)mouseX / (double)Window::Get().GetWidth();
-            double my = (double)mouseY / (double)Window::Get().GetHeight();
-
-            double x_diff = mx - this->currentPos.x;
-            double y_diff = my - this->currentPos.y;
-
-            double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
-
-            double x_dir = x_diff / dist;
-            double y_dir = y_diff / dist;
-
-            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
-
-            StateManager::Get().AddEntity(p);
-        }
+        shoot();
     }
 
     if (Input::Get().GetKeyDown(SDLK_SPACE) || Input::Get().GetKeyDown(SDLK_w))
@@ -168,4 +146,31 @@ BoundingBox Player::GetBounds() const
 void Player::OnUpdate()
 {
 
+}
+
+
+void Player::shoot(){
+     if ((StateManager::Get().GetTicks() - state.last_shot) >= (60 / stats.attack_speed))
+        {
+
+            state.last_shot = StateManager::Get().GetTicks();
+            int mouseX, mouseY;
+
+            Input::Get().GetMouseCoords(mouseX, mouseY);
+
+            double mx = (double)mouseX / (double)Window::Get().GetWidth();
+            double my = (double)mouseY / (double)Window::Get().GetHeight();
+
+            double x_diff = mx - this->currentPos.x;
+            double y_diff = my - this->currentPos.y;
+
+            double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
+
+            double x_dir = x_diff / dist;
+            double y_dir = y_diff / dist;
+
+            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
+
+            StateManager::Get().AddEntity(p);
+        }
 }
