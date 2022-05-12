@@ -7,6 +7,8 @@
 #include "../window.h"
 #include "../StateManager.h"
 
+#include <cmath>
+
 
 
 class Projectile: public Entity{
