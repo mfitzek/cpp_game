@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "player.h"
 #include "window.h"
+#include "map/map.h"
 
 
 
@@ -11,6 +12,7 @@
 #include <memory>
 #include <algorithm>
 #include <iterator>
+
 
 using std::vector;
 using std::shared_ptr;
@@ -39,6 +41,8 @@ class StateManager {
         void Tick();
         void Render();
         static StateManager& Get();
+
+        Map map;
 
         size_t GetTicks() const;
 };

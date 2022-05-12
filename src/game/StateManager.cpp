@@ -44,6 +44,7 @@ void StateManager::Tick(){
 }
 
 void StateManager::Render(){
+    map.render();
     for(auto e: entities){
         e->render();
     }

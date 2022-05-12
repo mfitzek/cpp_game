@@ -13,9 +13,55 @@ Player::Player(double x, double y)
 
 void Player::update(double delta)
 {
-   CheckCollisions();
-    this->currentPos.x += (x_velocity * stats.movement_speed * delta);
-    this->currentPos.y += (y_velocity * delta);
+    //    CheckCollisions(delta);
+
+    auto bounds_x = GetBounds();
+    bounds_x.x1 += x_velocity * stats.movement_speed * delta;
+    bounds_x.x2 += x_velocity * stats.movement_speed * delta;
+
+    auto bounds_y = GetBounds();
+    bounds_y.y1 += (y_velocity * delta);
+    bounds_y.y2 += (y_velocity * delta);
+
+    auto &map = StateManager::Get().map;
+
+    bool on_ground = false;
+    bool can_move_Y = true;
+    bool can_move_X = true;
+
+    for (auto &l : map.map)
+    {
+
+        if (l.IsHorizontal())
+        {
+            if (bounds_y.CheckCollision(l))
+            {
+                if(currentPos.y + this->height <= l.y1){
+                    on_ground = true;
+                }else{
+                    y_velocity = 0;
+                }
+                can_move_Y = false;
+            }
+        }
+        if (l.IsVertical())
+        {
+            if (bounds_x.CheckCollision(l))
+            {
+                can_move_X = false;
+            }
+        }
+    }
+
+    state.is_on_ground = on_ground;
+
+    if (!state.is_on_ground && can_move_Y)
+    {
+        this->currentPos.y += (y_velocity * delta);
+    }
+    if(can_move_X){
+        this->currentPos.x += (x_velocity * stats.movement_speed * delta);
+    }
 }
 
 void Player::gravity()
@@ -34,14 +80,13 @@ void Player::tick()
 {
     handle_input();
     gravity();
-
 }
 
 void Player::handle_input()
 {
     if (Input::Get().GetKeyDown(SDLK_a) || Input::Get().GetKeyDown(SDLK_d))
     {
-         this->x_velocity = Input::Get().GetKeyDown(SDLK_a) ? -X_BASE_SPEED : X_BASE_SPEED;
+        this->x_velocity = Input::Get().GetKeyDown(SDLK_a) ? -X_BASE_SPEED : X_BASE_SPEED;
     }
     else
     {
@@ -58,8 +103,8 @@ void Player::handle_input()
 
             Input::Get().GetMouseCoords(mouseX, mouseY);
 
-            double mx = (double) mouseX / (double)Window::Get().GetWidth();
-            double my = (double) mouseY / (double)Window::Get().GetHeight();
+            double mx = (double)mouseX / (double)Window::Get().GetWidth();
+            double my = (double)mouseY / (double)Window::Get().GetHeight();
 
             double x_diff = mx - this->currentPos.x;
             double y_diff = my - this->currentPos.y;
@@ -69,7 +114,7 @@ void Player::handle_input()
             double x_dir = x_diff / dist;
             double y_dir = y_diff / dist;
 
-            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir*0.5);
+            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
 
             StateManager::Get().AddEntity(p);
         }
@@ -79,9 +124,6 @@ void Player::handle_input()
     {
         jump();
     }
-
-
-
 }
 
 void Player::jump()
@@ -90,28 +132,6 @@ void Player::jump()
     {
         this->y_velocity -= JUMP_VEL;
         state.is_on_ground = false;
-    }
-}
-
-void Player::CheckCollisions()
-{
-    Line l(0.1, 0.9, 0.9, 0.9);
-    auto bounds = GetBounds();
-
-    if (bounds.CheckCollision(l))
-    {
-        state.is_on_ground = true;
-        y_velocity = 0;
-        currentPos.y = l.y1 - this->height - 0.0001;
-    }
-    else
-    {
-        bounds.y1 += 0.0001;
-        bounds.y2 += 0.0001;
-        if(!bounds.CheckCollision(l)){
-
-            state.is_on_ground = false;
-        }
     }
 }
 
@@ -126,11 +146,9 @@ void Player::render()
         .h = this->GetActualHeight()};
 
     auto renderer = window.get_renderer();
-    
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderFillRect(renderer, &rect);
-
-
 }
 
 int Player::GetActualWidth() const
@@ -144,10 +162,10 @@ int Player::GetActualHeight() const
 
 BoundingBox Player::GetBounds() const
 {
-    return BoundingBox(currentPos.x, currentPos.y,  width, height);
+    return BoundingBox(currentPos.x, currentPos.y, width, height);
 }
-
 
 void Player::OnUpdate()
 {
+
 }

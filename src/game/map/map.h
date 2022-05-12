@@ -9,9 +9,9 @@
 
 
 class Map {
-
+    public:
     std::vector<Line> map;
-
+    Map();
     void render();
 
 };

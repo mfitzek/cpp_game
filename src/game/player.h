@@ -58,19 +58,17 @@ public:
     void update(double delta) override;
     void render() override;
     void tick() override;
-
-    void CheckCollisions();
-
     void handle_input();
 
-    void jump();
-    void gravity();
 
+    BoundingBox GetBounds() const;
     int GetActualWidth() const;
     int GetActualHeight() const;
 
 
-    BoundingBox GetBounds() const;
+    void jump();
+    void gravity();
+
 
     void OnUpdate() override;
 
