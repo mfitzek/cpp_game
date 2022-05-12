@@ -9,12 +9,14 @@
 
 #include <cmath>
 
-
+#include "../collisions/BoundingBox.h"
 
 class Projectile: public Entity{
 
     double velocity_x;
     double velocity_y;
+
+    double size = 0.002;
 
 public:
 
@@ -23,5 +25,9 @@ public:
     void update(double delta) override;
     void tick() override;
     void render() override; 
+
+    BoundingBox GetBounds() const;
+
+
 
 };
