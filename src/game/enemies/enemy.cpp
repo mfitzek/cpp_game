@@ -38,6 +38,10 @@ void Enemy::update(double delta){
         currentPos.x +=vel_x * stats.speed * delta;
         currentPos.y +=vel_y * stats.speed * delta;
     }
+
+
+    auto& entities = StateManager::Get().entities;
+
     
 
 }
@@ -45,16 +49,28 @@ void Enemy::update(double delta){
 
 void Enemy::tick(){
     auto player = StateManager::Get().player;
-    if(player->GetPosition().x > currentPos.x){
+
+    auto player_p = player->GetPosition();
+
+    if(player_p.x > currentPos.x){
         vel_x = stats.speed;
-    }else if (player->GetPosition().x < currentPos.x){
+    }else if (player_p.x < currentPos.x){
         vel_x = -stats.speed;
     }else{
         vel_x = 0;
     }
 
+    double range = sqrt(pow(player_p.x - currentPos.x, 2) + pow(player_p.y - currentPos.y,2));
 
-    auto player_p = player->GetPosition();
+
+    if(range >= 0.6){
+        vel_y = stats.speed;
+    }else if(range <= 0.5){
+        vel_y = -stats.speed;
+    }else{
+        vel_y = 0;
+    }
+
     
     double x_diff = player_p.x - this->currentPos.x;
     double y_diff = player_p.y - this->currentPos.y;

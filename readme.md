@@ -4,8 +4,22 @@
 
 ## TODO:
 
-- [ ] basic game loop
-- [ ] base entity class
-- [ ] image loading
-- [ ] game
-- [ ] Multiplayer 
+- Kolize entit
+  - player, enemy hp
+  - projektil dmg
+
+- Player stats
+
+- Player buffs
+
+- více druhu nepřátel
+
+- Images ... !!!
+
+- Levels
+  - výběr buffu
+  - lepší nepřátelé
+
+- Skóre
+  - počet lvlů
+  - uložení někde
