@@ -6,9 +6,11 @@
 #include "window.h"
 
 
-struct Point{
+typedef struct point{
     double x, y;
-};
+} Point;
+
+
 
 class Entity {
     protected:
@@ -19,6 +21,8 @@ class Entity {
     public:
 
     bool next_remove = false;
+
+    Point GetPosition() const;
 
     virtual void update(double delta) = 0;
     virtual void render() = 0;

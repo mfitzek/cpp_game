@@ -46,7 +46,7 @@ private:
     double y_velocity = 0.0;
 
     double width = 0.03;
-    double height = 0.1;
+    double height = 0.03;
 
     stats stats;
     state state;

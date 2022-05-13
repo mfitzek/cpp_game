@@ -34,6 +34,8 @@ FILE(GLOB src_files
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/utils/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/ResourceManager/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/ResourceManager/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/enemies/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/enemies/*.h"
 )
 
 
