@@ -52,6 +52,29 @@ void Enemy::tick(){
     }else{
         vel_x = 0;
     }
+
+
+    auto player_p = player->GetPosition();
+    
+    double x_diff = player_p.x - this->currentPos.x;
+    double y_diff = player_p.y - this->currentPos.y;
+
+    double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
+
+    double x_dir = x_diff / dist;
+    double y_dir = y_diff / dist;
+
+         if ((StateManager::Get().GetTicks() - stats.last_shot) >= (60/2))
+        {
+
+            stats.last_shot = StateManager::Get().GetTicks();
+
+            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
+
+            StateManager::Get().AddEntity(p);
+        }
+
+
 }
 
 void Enemy::render(){
