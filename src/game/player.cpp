@@ -171,6 +171,9 @@ void Player::shoot(){
 
             auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
 
+            p->player_shot = true;
+            p->dmg = stats.attack_damage;
+
             StateManager::Get().AddEntity(p);
         }
 }

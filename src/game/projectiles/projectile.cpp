@@ -44,6 +44,10 @@ void Projectile::render()
 
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
 
+    if(player_shot){
+        SDL_SetRenderDrawColor(render, 67, 160, 253, 255);
+    }
+
     int r = size * window.GetWidth();
     for (int y = -r; y <= r; y++)
     {

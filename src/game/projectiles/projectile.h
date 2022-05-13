@@ -22,9 +22,14 @@ public:
 
     Projectile(double x, double y, double vel_x, double vel_y);
 
+    double dmg = 0;
+    bool player_shot = false;
+
     void update(double delta) override;
     void tick() override;
     void render() override; 
+
+
 
     BoundingBox GetBounds() const;
 

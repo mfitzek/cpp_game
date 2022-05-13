@@ -16,6 +16,10 @@ StateManager::StateManager(){
     entities.push_back(player);
 
     entities.push_back(std::make_shared<Enemy>(0.2, 0.2));
+    entities.push_back(std::make_shared<Enemy>(0.3, 0.2));
+    entities.push_back(std::make_shared<Enemy>(0.9, 0.2));
+    entities.push_back(std::make_shared<Enemy>(0.6, 0.2));
+    entities.push_back(std::make_shared<Enemy>(0.4, 0.2));
 }
 
 

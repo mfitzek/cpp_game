@@ -21,10 +21,13 @@
 class StateManager;
 
 struct stats {
+    double attack_damage = 1.0;
     double attack_speed = 3.0;
     double movement_speed = 1.0;
     double jump_height = 1.0;
     int max_health = 60;
+
+
 };
 
 struct state{

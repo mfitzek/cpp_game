@@ -25,6 +25,7 @@ class Enemy;
 
 struct EnemyStats {
     double health = 6.0;
+    double attack_speed = 1.5;
 };
 
 class StateManager {
