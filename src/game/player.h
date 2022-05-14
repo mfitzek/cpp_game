@@ -19,20 +19,21 @@
 #include "utils/Observer.h"
 
 class StateManager;
+class Projectile;
 
 struct stats {
     double attack_damage = 1.0;
     double attack_speed = 3.0;
     double movement_speed = 1.0;
     double jump_height = 1.0;
-    int max_health = 60;
+    double max_health = 60.0;
 
 
 };
 
 struct state{
     size_t last_shot = 0;
-    int current_health = 60;
+    double health = 60.0;
     bool is_on_ground = false;
 };
 
@@ -49,11 +50,7 @@ private:
     double y_velocity = 0.0;
 
     double width = 0.03;
-    double height = 0.03;
-
-    stats stats;
-    state state;
-    
+    double height = 0.03;    
 
 public:
     Player(double x, double y);
@@ -63,6 +60,9 @@ public:
     void tick() override;
     void handle_input();
 
+
+    stats stats;
+    state state;
 
     BoundingBox GetBounds() const;
     int GetActualWidth() const;
@@ -74,7 +74,7 @@ public:
 
 
     void shoot();
-
+    void projectile_hit(std::shared_ptr<Projectile> projectile);
 
     void OnUpdate() override;
 

@@ -80,6 +80,26 @@ void Player::tick()
 {
     handle_input();
     gravity();
+
+
+
+    auto &entities = StateManager::Get().entities;
+
+    auto bounds = GetBounds();
+
+    for (auto &e : entities)
+    {
+        if (e.get() == this)
+            continue;
+
+        if (auto projectile = std::dynamic_pointer_cast<Projectile>(e))
+        {
+            if (bounds.CheckCollision(projectile->GetBounds()))
+            {
+                projectile_hit(projectile);
+            }
+        }
+    }
 }
 
 void Player::handle_input()
@@ -176,4 +196,11 @@ void Player::shoot(){
 
             StateManager::Get().AddEntity(p);
         }
+}
+
+void Player::projectile_hit(std::shared_ptr<Projectile> projectile){
+    if(!projectile->player_shot){
+        this->state.health -= projectile->dmg;
+        projectile->next_remove = true;
+    }
 }

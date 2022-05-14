@@ -57,7 +57,6 @@ class StateManager {
         struct EnemyStats enemy_stats;
 
 
-
         size_t GetTicks() const;
 };
 

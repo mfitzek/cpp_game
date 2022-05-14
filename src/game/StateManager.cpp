@@ -54,7 +54,30 @@ void StateManager::Render(){
     for(auto e: entities){
         e->render();
     }
+
+    auto& window = Window::Get();
+
+    SDL_SetRenderDrawColor(window.get_renderer(), 255,255,255,255);
+
+    SDL_Rect hp {
+        .x = 60,
+        .y = 60,
+        .h = 30,
+        .w = 240
+    };
+
+    SDL_RenderDrawRect(window.get_renderer(), &hp);
+
+    hp.w = std::max((int)((player->state.health / player->stats.max_health) * 238.0), 0);
+    hp.x += 1;
+    hp.y += 1;
+    hp.h -= 2;
+
+
+    SDL_SetRenderDrawColor(window.get_renderer(), 255,0,0,255);
+    SDL_RenderFillRect(window.get_renderer(), &hp);
 }
+
 
 
 void StateManager::AddEntity(shared_ptr<Entity> ent){
