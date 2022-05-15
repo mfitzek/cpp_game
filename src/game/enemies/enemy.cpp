@@ -108,7 +108,7 @@ void Enemy::shoot()
     double y_dir = y_diff / dist;
 
     auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.3, y_dir * 0.3);
-    p->dmg = 2.0;
+    p->dmg = stats.attack_damage;
 
     StateManager::Get().AddEntity(p);
 }
