@@ -35,6 +35,8 @@ public:
     int GetWidth();
     int GetHeight();
 
+    double GetDPI();
+
 
     void Notify() override;
 };

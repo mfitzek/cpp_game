@@ -4,7 +4,7 @@
 #include <SDL_image.h>
 
 #include <unordered_map>
-#include <string
+#include <string>
 
 class TextureManager {
 

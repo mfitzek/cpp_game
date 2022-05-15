@@ -89,3 +89,11 @@ void Window::Notify(){
             obs->OnUpdate();
     }
 }
+
+double Window::GetDPI(){
+    float dpi;
+
+    SDL_GetDisplayDPI(0, &dpi, nullptr, nullptr);
+
+    return (double)dpi;
+}
