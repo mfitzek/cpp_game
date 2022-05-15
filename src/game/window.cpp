@@ -4,6 +4,10 @@
 
 Window::Window()
 {
+    if (TTF_Init() != 0) {
+        std::cout << "error initializing SDL TTF: " <<  SDL_GetError() << std::endl;
+    }
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cout << "error initializing SDL: " <<  SDL_GetError() << std::endl;
     }
@@ -28,6 +32,7 @@ Window::Window()
 
 Window::~Window()
 {
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

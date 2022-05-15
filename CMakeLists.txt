@@ -48,12 +48,15 @@ find_package(SDL2 REQUIRED)
 set(SDL2_IMAGE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2_image)
 find_package(SDL2_image REQUIRED)
 
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+set(SDL2_TTF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libs/sdl2_ttf)
+find_package(SDL2_ttf REQUIRED)
+
+include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS})
 
 
 add_executable(${PROJECT_NAME} ${src_files})
 
-target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} )
+target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} )
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wno-c++98-compat )
 
@@ -61,6 +64,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wno-c++9
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/SDL2.dll"
+         "${CMAKE_SOURCE_DIR}/libs/sdl2_ttf/lib/x64/SDL2_ttf.dll"
          $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 
