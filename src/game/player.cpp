@@ -13,8 +13,7 @@ Player::Player(double x, double y)
 
 void Player::update(double delta)
 {
-    //    CheckCollisions(delta);
-
+    
     auto bounds_x = GetBounds();
     bounds_x.x1 += x_velocity * stats.movement_speed * delta;
     bounds_x.x2 += x_velocity * stats.movement_speed * delta;

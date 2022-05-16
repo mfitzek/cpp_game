@@ -4,12 +4,8 @@
 
 ## TODO:
 
-- Kolize entit
-  - player, enemy hp
-  - projektil dmg
 
 - Player stats
-
 - Player buffs
 
 - více druhu nepřátel

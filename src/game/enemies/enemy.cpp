@@ -5,11 +5,8 @@ Enemy::Enemy(double x, double y)
     currentPos.x = x;
     currentPos.y = y;
 
-    auto &game_stats = StateManager::Get().enemy_stats;
-
     state.last_shot = StateManager::Get().GetTicks();
-
-    state.health = game_stats.health;
+    state.health = stats.max_health;
 }
 
 void Enemy::update(double delta)

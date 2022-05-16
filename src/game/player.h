@@ -23,18 +23,22 @@ class Projectile;
 
 struct stats {
     double attack_damage = 1.0;
-    double attack_speed = 3.0;
+    double attack_speed = 1.0;
     double movement_speed = 1.0;
+    double projectile_size = 1.0;
+    double life_steal = 0.0;
+    double max_health = 40.0;
+    double armor = 1.0;
     double jump_height = 1.0;
-    double max_health = 60.0;
-
+    uint8_t max_jumps = 1;
 
 };
 
 struct state{
     size_t last_shot = 0;
-    double health = 60.0;
+    double health = 40.0;
     bool is_on_ground = false;
+    uint8_t jumps = 0;
 };
 
 

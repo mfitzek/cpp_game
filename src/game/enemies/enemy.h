@@ -13,8 +13,9 @@
 struct enemy_stats{
     double attack_speed = 1.0;
     double attack_damage = 1.0;
-    double speed = 0.2;
+    double projectile_size = 1.0;
     double max_health = 6.0;
+    double speed = 0.2;
 };
 
 
