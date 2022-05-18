@@ -10,8 +10,6 @@
 
 - více druhu nepřátel
 
-- Images ... !!!
-
 - Levels
   - výběr buffu
   - lepší nepřátelé

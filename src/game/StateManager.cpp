@@ -47,6 +47,11 @@ void StateManager::Tick()
     }
 
     ticks++;
+
+
+    if(game_state.enemies_spawn_remain == 0 && game_state.enemies_count == 0){
+        EndRound();
+    }
 }
 
 void StateManager::Render()
@@ -81,9 +86,8 @@ void StateManager::Render()
     SDL_Color color = {
         .r = 255, .b = 255, .g = 255, .a = 255};
 
-
     auto current_health = std::max((int)player->state.health, 0);
-    auto text = font->Text(std::to_string(current_health) + std::string("/") +  std::to_string((int)player->stats.max_health), color);
+    auto text = font->Text(std::to_string(current_health) + std::string("/") + std::to_string((int)player->stats.max_health), color);
 
     SDL_Rect r_text;
     r_text.x = 130;
@@ -102,4 +106,16 @@ void StateManager::AddEntity(shared_ptr<Entity> ent)
 size_t StateManager::GetTicks() const
 {
     return ticks;
+}
+
+void StateManager::NextRound()
+{
+    game_state.round++;
+    game_state.enemies_spawn_remain = ( 3 + (game_state.round*0.5));
+}
+void StateManager::EndRound()
+{
+}
+void StateManager::Death()
+{
 }
