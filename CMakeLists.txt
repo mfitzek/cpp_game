@@ -61,10 +61,27 @@ target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES}
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wno-c++98-compat )
 
 
+file(GLOB lib_files 
+    "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/*.dll"
+    "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/*.lib"
+    "${CMAKE_SOURCE_DIR}/libs/sdl2_ttf/lib/x64/*.dll"
+    "${CMAKE_SOURCE_DIR}/libs/sdl2_ttf/lib/x64/*.lib"
+    "${CMAKE_SOURCE_DIR}/libs/sdl2_image/lib/x64/*.dll"
+    "${CMAKE_SOURCE_DIR}/libs/sdl2_image/lib/x64/*.lib"
+)
+
+
+# add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#      COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#          "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/SDL2.dll"
+#          "${CMAKE_SOURCE_DIR}/libs/sdl2_ttf/lib/x64/SDL2_ttf.dll"
+#          "${CMAKE_SOURCE_DIR}/libs/sdl2_image/lib/x64/*.dll"
+#          "${CMAKE_SOURCE_DIR}/libs/sdl2_image/lib/x64/*.lib"
+#          $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
-         "${CMAKE_SOURCE_DIR}/libs/sdl2/lib/x64/SDL2.dll"
-         "${CMAKE_SOURCE_DIR}/libs/sdl2_ttf/lib/x64/SDL2_ttf.dll"
+        ${lib_files}
          $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
 

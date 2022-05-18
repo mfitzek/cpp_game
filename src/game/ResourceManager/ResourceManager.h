@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include <memory>
 
+#include "Texture.h"
+
 
 class ResourceManager{
 
@@ -18,7 +20,7 @@ class ResourceManager{
 
 
         std::unordered_map<std::string, TTF_Font*> fonts;
-        std::unordered_map<std::string, SDL_Texture*> textures;
+        std::unordered_map<std::string, Texture> textures;
         
 
 
