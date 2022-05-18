@@ -6,7 +6,15 @@
 
 Texture::Texture(std::string path){
     auto surface = IMG_Load(path.c_str());
+
+    if(!surface){
+        std::cout << "Image error handling: " << SDL_GetError() << std::endl;
+    }
+
+
     texture = SDL_CreateTextureFromSurface(Window::Get().get_renderer(), surface);
+
+    
     SDL_FreeSurface(surface);
 }
 

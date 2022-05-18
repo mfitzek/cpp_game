@@ -194,7 +194,7 @@ void Player::shoot(){
             double x_dir = x_diff / dist;
             double y_dir = y_diff / dist;
 
-            auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.5, y_dir * 0.5);
+            auto p = std::make_shared<Projectile>(this->currentPos.x + (width/2), this->currentPos.y + (height/2), x_dir * 0.5, y_dir * 0.5);
 
             p->player_shot = true;
             p->dmg = stats.attack_damage;

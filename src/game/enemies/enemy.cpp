@@ -88,8 +88,17 @@ void Enemy::render()
 
     auto renderer = window.get_renderer();
 
-    SDL_SetRenderDrawColor(renderer, (state.health*255.0 /stats.max_health  ), (state.health*255.0 /stats.max_health  ), 0, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    auto texture = ResourceManager::Get().GetTexture("enemy");
+
+    SDL_SetTextureBlendMode(texture->get(), SDL_BLENDMODE_BLEND);//This sets the texture in blendmode
+
+
+    SDL_SetTextureAlphaMod(texture->get(), (state.health*255.0 /stats.max_health )); //sets the alpha into the texture
+
+    // SDL_SetRenderDrawColor(renderer, (state.health*255.0 /stats.max_health  ), (state.health*255.0 /stats.max_health  ), 0, 255);
+    // SDL_RenderFillRect(renderer, &rect);
+
+    SDL_RenderCopy(renderer, texture->get(), nullptr, &rect);
 }
 
 void Enemy::shoot()

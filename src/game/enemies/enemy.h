@@ -34,8 +34,8 @@ class Enemy: public Entity {
         double vel_y = 0;
 
 
-        double width = 0.03;
-        double height = 0.1;
+        double width = 0.1;
+        double height = 0.05;
         
     public:
 

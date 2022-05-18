@@ -10,6 +10,7 @@ Game::Game()
     auto& resources = ResourceManager::Get();
 
     resources.LoadTexture("../assets/images/player/player.png", "player");
+    resources.LoadTexture("../assets/images/enemy/enemy.png", "enemy");
 
 }
 
