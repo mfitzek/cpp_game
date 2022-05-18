@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include "../window.h"
 
 class Texture{
     private:
@@ -12,6 +13,7 @@ class Texture{
 
     public:
         Texture(std::string path);
+        SDL_Texture* get() const;
         ~Texture();
 
 

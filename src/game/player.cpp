@@ -136,6 +136,8 @@ void Player::render()
 {
     Window &window = Window::Get();
 
+
+
     SDL_Rect rect{
         .x = (int)(this->currentPos.x * window.GetWidth()),
         .y = (int)(this->currentPos.y * window.GetHeight()),
@@ -144,8 +146,12 @@ void Player::render()
 
     auto renderer = window.get_renderer();
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    
+    auto p_texture = ResourceManager::Get().GetTexture("player");
+    SDL_RenderCopy(renderer, p_texture->get(), nullptr, &rect);
+
+   // SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    //SDL_RenderFillRect(renderer, &rect);
 }
 
 int Player::GetActualWidth() const

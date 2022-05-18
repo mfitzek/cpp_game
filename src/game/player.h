@@ -10,6 +10,9 @@
 #include "StateManager.h"
 #include "projectiles/projectile.h"
 
+#include "ResourceManager/ResourceManager.h"
+#include "ResourceManager/Texture.h"
+
 #include <stdint.h>
 #include <cmath>
 
@@ -53,8 +56,8 @@ private:
     double x_velocity = 0.0;
     double y_velocity = 0.0;
 
-    double width = 0.03;
-    double height = 0.03;    
+    double width = 0.05;
+    double height = 0.12;    
 
 public:
     Player(double x, double y);

@@ -7,6 +7,10 @@ using std::endl;
 
 Game::Game()
 {
+    auto& resources = ResourceManager::Get();
+
+    resources.LoadTexture("../assets/images/player/player.png", "player");
+
 }
 
 Game::~Game(){

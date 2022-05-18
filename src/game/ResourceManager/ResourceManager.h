@@ -10,6 +10,9 @@
 #include <memory>
 
 #include "Texture.h"
+#include "Font.h"
+
+using std::shared_ptr;
 
 
 class ResourceManager{
@@ -19,23 +22,25 @@ class ResourceManager{
         ResourceManager();
 
 
-        std::unordered_map<std::string, TTF_Font*> fonts;
-        std::unordered_map<std::string, Texture> textures;
-        
-
+        std::unordered_map<std::string, shared_ptr<Font>> fonts;
+        std::unordered_map<std::string, shared_ptr<Texture>> textures;
 
     public:
         ~ResourceManager();
         ResourceManager(const ResourceManager&) = delete;
 
-        ResourceManager& Get();
-        
+        static ResourceManager& Get();
 
-        static SDL_Texture* LoadTexture(std::string path, std::string name);
-        static SDL_Texture* GetTexture(std::string name);
+        shared_ptr<Texture> LoadTexture(std::string path, std::string name);
+        shared_ptr<Texture> GetTexture(std::string name);
+        shared_ptr<Font> LoadFont(std::string path, std::string name, int font_size);
+        shared_ptr<Font> GetFont(std::string font, std::string text);
 
-        static bool LoadFont(std::string path, std::string name, int font_size);
-        static SDL_Texture* GetText(std::string font, std::string text);
+//         static shared_ptr<Texture> LoadTexture(std::string path, std::string name);
+//         static shared_ptr<Texture> GetTexture(std::string name);
+
+//         static shared_ptr<Font> LoadFont(std::string path, std::string name, int font_size);
+//         static shared_ptr<Font> GetFont(std::string font, std::string text);
 
 
 };

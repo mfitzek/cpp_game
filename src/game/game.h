@@ -10,6 +10,7 @@
 #include "player.h"
 #include "input.h"
 #include "StateManager.h"
+#include "ResourceManager/ResourceManager.h"
 
 
 class Game
