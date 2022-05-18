@@ -30,10 +30,23 @@ shared_ptr<Texture> ResourceManager::GetTexture(std::string name){
     if(textures.contains(name)){
         return textures[name];
     }
-    return shared_ptr<Texture>();
+    throw "Texture not found";
 }
 
 
 
+shared_ptr<Font> ResourceManager::LoadFont(std::string path, std::string name, int font_size){
+    auto font = std::make_shared<Font>(path, font_size);
+    fonts.insert_or_assign(name, font);
+    return font;
+}
+
+
+shared_ptr<Font> ResourceManager::GetFont(std::string name){
+    if(fonts.contains(name)){
+        return fonts[name];
+    }
+    throw "Font not found";
+}
 
 

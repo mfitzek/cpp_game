@@ -34,7 +34,7 @@ class ResourceManager{
         shared_ptr<Texture> LoadTexture(std::string path, std::string name);
         shared_ptr<Texture> GetTexture(std::string name);
         shared_ptr<Font> LoadFont(std::string path, std::string name, int font_size);
-        shared_ptr<Font> GetFont(std::string font, std::string text);
+        shared_ptr<Font> GetFont(std::string font);
 
 //         static shared_ptr<Texture> LoadTexture(std::string path, std::string name);
 //         static shared_ptr<Texture> GetTexture(std::string name);

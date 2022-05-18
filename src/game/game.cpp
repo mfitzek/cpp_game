@@ -12,6 +12,8 @@ Game::Game()
     resources.LoadTexture("../assets/images/player/player.png", "player");
     resources.LoadTexture("../assets/images/enemy/enemy.png", "enemy");
 
+    resources.LoadFont("../assets/fonts/AncientModernTales.ttf", "ancient24", 24);
+
 }
 
 Game::~Game(){

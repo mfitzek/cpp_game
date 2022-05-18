@@ -13,6 +13,7 @@ class Texture{
 
     public:
         Texture(std::string path);
+        Texture(SDL_Texture* texture);
         SDL_Texture* get() const;
         ~Texture();
 

@@ -18,6 +18,10 @@ Texture::Texture(std::string path){
     SDL_FreeSurface(surface);
 }
 
+Texture::Texture(SDL_Texture* text){
+    texture = text;
+}
+
 
 SDL_Texture* Texture::get() const {
     return texture;
