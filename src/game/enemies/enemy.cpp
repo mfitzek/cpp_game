@@ -95,9 +95,10 @@ void Enemy::render()
 void Enemy::shoot()
 {
     state.last_shot = StateManager::Get().GetTicks();
+    auto player = StateManager::Get().player;
     auto player_p = StateManager::Get().player->GetPosition();
-    double x_diff = player_p.x - this->currentPos.x;
-    double y_diff = player_p.y - this->currentPos.y;
+    double x_diff = (player_p.x + (player->GetWidth() / 2)) - this->currentPos.x;
+    double y_diff = (player_p.y + (player->GetHeight() / 2)) - this->currentPos.y;
 
     double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
 

@@ -75,6 +75,8 @@ public:
     int GetActualWidth() const;
     int GetActualHeight() const;
 
+    double GetHeight() const;
+    double GetWidth() const;
 
     void jump();
     void gravity();

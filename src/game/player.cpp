@@ -209,3 +209,12 @@ void Player::projectile_hit(std::shared_ptr<Projectile> projectile){
         projectile->next_remove = true;
     }
 }
+
+
+double Player::GetHeight() const {
+    return height;
+}
+
+double Player::GetWidth() const {
+    return width;
+}
