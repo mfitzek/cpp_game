@@ -186,6 +186,7 @@ void Enemy::projectile_hit(std::shared_ptr<Projectile> projectile)
         if (state.health <= 0)
         {
             next_remove = true;
+            StateManager::Get().game_state.enemies_count--;
         }
     }
 }

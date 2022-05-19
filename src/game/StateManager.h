@@ -13,6 +13,7 @@
 #include <memory>
 #include <algorithm>
 #include <iterator>
+#include <random>
 
 
 using std::vector;
@@ -41,11 +42,16 @@ struct GameState {
     size_t lifesteal_buffs = 0;
     size_t movement_buffs = 0;
     size_t jump_height_buffs = 0;
+
+
+    size_t last_spawn_tick = 0;
 };
 
 class StateManager {
 
     private:
+
+        std::default_random_engine random_eng;
 
         size_t ticks = 0;
 

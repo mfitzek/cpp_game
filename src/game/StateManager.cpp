@@ -9,14 +9,21 @@ StateManager &StateManager::Get()
 
 StateManager::StateManager()
 {
+
+    std::random_device rd;
+    random_eng = std::default_random_engine(rd());
+
+
     player = std::make_shared<Player>(0.5, 0.5);
     entities.push_back(player);
 
-    entities.push_back(std::make_shared<Enemy>(0.2, 0.2));
-    entities.push_back(std::make_shared<Enemy>(0.3, 0.2));
-    entities.push_back(std::make_shared<Enemy>(0.9, 0.2));
-    entities.push_back(std::make_shared<Enemy>(0.6, 0.2));
-    entities.push_back(std::make_shared<Enemy>(0.4, 0.2));
+    NextRound();
+
+    // entities.push_back(std::make_shared<Enemy>(0.2, 0.2));
+    // entities.push_back(std::make_shared<Enemy>(0.3, 0.2));
+    // entities.push_back(std::make_shared<Enemy>(0.9, 0.2));
+    // entities.push_back(std::make_shared<Enemy>(0.6, 0.2));
+    // entities.push_back(std::make_shared<Enemy>(0.4, 0.2));
 }
 
 void StateManager::Update(double delta)
@@ -32,8 +39,24 @@ void StateManager::Tick()
 
     auto to_remove = std::remove_if(entities.begin(), entities.end(), [](shared_ptr<Entity> e)
                                     { return e->next_remove; });
-
     entities.erase(to_remove, entities.end());
+
+
+    if(game_state.enemies_spawn_remain && ticks - game_state.last_spawn_tick >= 60) {
+        game_state.enemies_spawn_remain--;
+        game_state.enemies_count++;
+        game_state.last_spawn_tick = ticks;
+
+        std::uniform_real_distribution<double> distr(0.000001, 0.9999);
+
+        double x = std::fmod(distr(random_eng), 0.85);
+        double y = std::fmod(distr(random_eng), 0.4);
+   
+
+        append_entity.push_back(std::make_shared<Enemy>(x,y));
+
+    }
+
 
     if (append_entity.size())
     {
@@ -46,12 +69,11 @@ void StateManager::Tick()
         e->tick();
     }
 
-    ticks++;
-
-
     if(game_state.enemies_spawn_remain == 0 && game_state.enemies_count == 0){
         EndRound();
     }
+
+    ticks++;
 }
 
 void StateManager::Render()
@@ -115,6 +137,7 @@ void StateManager::NextRound()
 }
 void StateManager::EndRound()
 {
+    NextRound();
 }
 void StateManager::Death()
 {
