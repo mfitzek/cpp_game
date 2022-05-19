@@ -186,15 +186,19 @@ void Player::shoot(){
             double mx = (double)mouseX / (double)Window::Get().GetWidth();
             double my = (double)mouseY / (double)Window::Get().GetHeight();
 
-            double x_diff = mx - this->currentPos.x;
-            double y_diff = my - this->currentPos.y;
+
+            double player_x = this->currentPos.x + (width/2);
+            double player_y = this->currentPos.y + (height/2);
+
+            double x_diff = mx - player_x;
+            double y_diff = my - player_y;
 
             double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
 
             double x_dir = x_diff / dist;
             double y_dir = y_diff / dist;
 
-            auto p = std::make_shared<Projectile>(this->currentPos.x + (width/2), this->currentPos.y + (height/2), x_dir * 0.5, y_dir * 0.5);
+            auto p = std::make_shared<Projectile>(player_x, player_y , x_dir * 0.5, y_dir * 0.5);
 
             p->player_shot = true;
             p->dmg = stats.attack_damage;

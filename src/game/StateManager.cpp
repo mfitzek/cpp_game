@@ -90,10 +90,10 @@ void StateManager::Render()
     auto text = font->Text(std::to_string(current_health) + std::string("/") + std::to_string((int)player->stats.max_health), color);
 
     SDL_Rect r_text;
-    r_text.x = 130;
-    r_text.y = 60;
-    r_text.w = 120;
-    r_text.h = 30;
+    r_text.x = 135;
+    r_text.y = 62;
+    r_text.w = 90;
+    r_text.h = 26;
 
     SDL_RenderCopy(window.get_renderer(), text->get(), nullptr, &r_text);
 }
