@@ -7,18 +7,35 @@ Map::Map()
     map.emplace_back(0.01, 0.01, 0.01, 0.90); // Left
     map.emplace_back(0.99, 0.01, 0.99, 0.90); // Right
 
-    map.emplace_back(0.01, 0.65, 0.06, 0.65);
-    map.emplace_back(0.06, 0.70, 0.11, 0.70);
-    map.emplace_back(0.06, 0.65, 0.06, 0.70);
-    map.emplace_back(0.11, 0.75, 0.21, 0.75);
-    map.emplace_back(0.11, 0.70, 0.11, 0.75);
+    map.emplace_back(0.01, 0.70, 0.06, 0.70);
+    map.emplace_back(0.06, 0.75, 0.11, 0.75);
+    map.emplace_back(0.06, 0.70, 0.06, 0.75);
+    map.emplace_back(0.11, 0.80, 0.26, 0.80);
+    map.emplace_back(0.11, 0.75, 0.11, 0.80);
 
-    map.emplace_back(0.35, 0.9, 0.35, 0.85);
-    map.emplace_back(0.35, 0.85, 0.40, 0.85);
-    map.emplace_back(0.40, 0.85, 0.4, 0.8);
-    map.emplace_back(0.40, 0.8, 0.45, 0.8);
-    map.emplace_back(0.45, 0.8, 0.45, 0.75);
-    map.emplace_back(0.45, 0.75, 0.50, 0.75);
+    map.emplace_back(0.26, 0.75, 0.31, 0.75);
+
+    map.emplace_back(0.26, 0.80, 0.26, 0.75);
+    map.emplace_back(0.31, 0.70, 0.36, 0.70);
+
+    map.emplace_back(0.31, 0.70, 0.31, 0.75);
+    map.emplace_back(0.36, 0.75, 0.41, 0.75);
+
+    map.emplace_back(0.36, 0.70, 0.36, 0.75);
+    map.emplace_back(0.41, 0.80, 0.46, 0.80);
+
+    map.emplace_back(0.41, 0.75, 0.41, 0.80);
+    map.emplace_back(0.46, 0.80, 0.46, 0.85);
+
+    map.emplace_back(0.46, 0.85, 0.51, 0.85);
+    map.emplace_back(0.51, 0.85, 0.51, 0.90);
+
+    map.emplace_back(0.84, 0.9, 0.84, 0.85);
+    map.emplace_back(0.84, 0.85, 0.89, 0.85);
+    map.emplace_back(0.89, 0.85, 0.89, 0.8);
+    map.emplace_back(0.89, 0.8, 0.94, 0.8);
+    map.emplace_back(0.94, 0.8, 0.94, 0.75);
+    map.emplace_back(0.94, 0.75, 0.99, 0.75);
 }
 
 void Map::render()
