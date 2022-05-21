@@ -20,7 +20,6 @@ class Projectile : public Entity
 
 public:
     Projectile(double x, double y, double vel_x, double vel_y);
-    ~Projectile();
 
     double dmg = 0;
     bool player_shot = false;

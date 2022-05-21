@@ -79,7 +79,3 @@ BoundingBox Projectile::GetBounds() const
 }
 
 
-
-Projectile::~Projectile(){
-    
-}

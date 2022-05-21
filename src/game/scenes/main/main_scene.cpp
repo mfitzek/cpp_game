@@ -81,10 +81,3 @@ vector<shared_ptr<Entity>> MainScene::GetEntities(){
     return entities;
 }
 
-MainScene::MainScene(){
-
-}
-
-MainScene::~MainScene(){
-    
-}

@@ -26,8 +26,6 @@ private:
     vector<shared_ptr<Entity>> entities;
 
 public:
-    MainScene();
-    ~MainScene();
     virtual void update(double delta) override;
     virtual void tick() override;
     virtual void render() override;

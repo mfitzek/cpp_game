@@ -21,7 +21,7 @@ private:
 
 public:
 
-    ~Window();
+    ~Window() override;
     Window(const Window&) = delete;
 
     void Clear();
