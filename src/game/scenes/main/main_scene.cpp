@@ -22,7 +22,9 @@ void MainScene::tick()
 }
 
 void MainScene::render()
-{
+{   
+
+    map.render();
 
     // Render all entities
     for (auto entity : this->entities)

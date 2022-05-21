@@ -9,6 +9,7 @@
 #include "../../map/map.h"
 
 #include "../../StateManager.h"
+#include "../../map/map.h"
 
 #include <vector>
 #include <memory>
@@ -24,6 +25,7 @@ class MainScene : public Scene
 
 private:
     vector<shared_ptr<Entity>> entities;
+    Map map;
 
 public:
     virtual void update(double delta) override;

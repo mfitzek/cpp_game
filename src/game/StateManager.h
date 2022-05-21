@@ -9,6 +9,7 @@
 
 #include "scenes/scene.h"
 #include "scenes/main/main_scene.h"
+#include "scenes/score/score_scene.h"
 
 
 #include <vector>

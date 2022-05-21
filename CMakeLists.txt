@@ -40,6 +40,8 @@ FILE(GLOB src_files
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/main/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/main/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/score/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/score/*.cpp"
 )
 
 
@@ -63,6 +65,8 @@ add_executable(${PROJECT_NAME} ${src_files})
 target_link_libraries( ${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} )
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -pedantic -Wno-c++98-compat -Wno-c++98-compat-pedantic )
+
+# set_source_files_properties( ${src_files} PROPERTIES COMPILE_FLAGS -Wall -Wextra -pedantic -Wno-c++98-compat -Wno-c++98-compat-pedantic ) 
 
 
 file(GLOB lib_files 

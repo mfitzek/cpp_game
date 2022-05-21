@@ -19,6 +19,11 @@ StateManager::StateManager()
     scenes.insert_or_assign("main", main_scene);
     main_scene->AddEntity(player);
 
+    scenes.insert_or_assign("score", std::make_shared<ScoreScene>(25));
+
+    current_scene = "score";
+
+
 
     NextRound();
 
@@ -74,7 +79,7 @@ void StateManager::Tick()
 
 void StateManager::Render()
 {
-    map.render();
+    //map.render();
 
 
     scenes[current_scene]->render();
