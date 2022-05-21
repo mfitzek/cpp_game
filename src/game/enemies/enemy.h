@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "../entity.h"
 #include "../StateManager.h"
 #include "SDL.h"
@@ -9,8 +8,8 @@
 #include "../collisions/BoundingBox.h"
 #include "../projectiles/projectile.h"
 
-
-struct enemy_stats{
+struct enemy_stats
+{
     double attack_speed = 1.0;
     double attack_damage = 1.0;
     double projectile_size = 1.0;
@@ -18,27 +17,26 @@ struct enemy_stats{
     double speed = 0.2;
 };
 
-
-struct enemy_state{
+struct enemy_state
+{
     size_t last_shot = 0;
     double health;
 };
 
 class Projectile;
 
-class Enemy: public Entity {
-    private: 
-        enemy_stats stats;
-        enemy_state state;
-        double vel_x = 0;
-        double vel_y = 0;
+class Enemy : public Entity
+{
+private:
+    enemy_stats stats;
+    enemy_state state;
+    double vel_x = 0;
+    double vel_y = 0;
 
+    double width = 0.1;
+    double height = 0.05;
 
-        double width = 0.1;
-        double height = 0.05;
-        
-    public:
-
+public:
     Enemy(double x, double y);
 
     virtual void update(double delta) override;
@@ -52,6 +50,4 @@ class Enemy: public Entity {
     void check_projectile_collisions();
 
     BoundingBox GetBounds() const;
-
-
 };

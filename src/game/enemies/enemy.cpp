@@ -30,7 +30,7 @@ void Enemy::update(double delta)
             break;
         }
     }
-    auto &entities = StateManager::Get().entities;
+    auto entities = StateManager::Get().GetEntities();
 
     for (auto &e : entities)
     {
@@ -90,10 +90,9 @@ void Enemy::render()
 
     auto texture = ResourceManager::Get().GetTexture("enemy");
 
-    SDL_SetTextureBlendMode(texture->get(), SDL_BLENDMODE_BLEND);//This sets the texture in blendmode
+    SDL_SetTextureBlendMode(texture->get(), SDL_BLENDMODE_BLEND); // This sets the texture in blendmode
 
-
-    SDL_SetTextureAlphaMod(texture->get(), (state.health*255.0 /stats.max_health )); //sets the alpha into the texture
+    SDL_SetTextureAlphaMod(texture->get(), (state.health * 255.0 / stats.max_health)); // sets the alpha into the texture
 
     // SDL_SetRenderDrawColor(renderer, (state.health*255.0 /stats.max_health  ), (state.health*255.0 /stats.max_health  ), 0, 255);
     // SDL_RenderFillRect(renderer, &rect);
@@ -156,7 +155,7 @@ void Enemy::ai_move()
 
 void Enemy::check_projectile_collisions()
 {
-    auto &entities = StateManager::Get().entities;
+    auto entities = StateManager::Get().GetEntities();
 
     auto bounds = GetBounds();
 

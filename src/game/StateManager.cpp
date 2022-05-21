@@ -13,9 +13,12 @@ StateManager::StateManager()
     std::random_device rd;
     random_eng = std::default_random_engine(rd());
 
-
     player = std::make_shared<Player>(0.5, 0.5);
-    entities.push_back(player);
+
+    main_scene = std::make_shared<MainScene>();
+    scenes.insert_or_assign("main", main_scene);
+    main_scene->AddEntity(player);
+
 
     NextRound();
 
@@ -28,19 +31,11 @@ StateManager::StateManager()
 
 void StateManager::Update(double delta)
 {
-    for (auto e : entities)
-    {
-        e->update(delta);
-    }
+    scenes[current_scene]->update(delta);
 }
 
 void StateManager::Tick()
 {
-
-    auto to_remove = std::remove_if(entities.begin(), entities.end(), [](shared_ptr<Entity> e)
-                                    { return e->next_remove; });
-    entities.erase(to_remove, entities.end());
-
 
     if(game_state.enemies_spawn_remain && ticks - game_state.last_spawn_tick >= 60) {
         game_state.enemies_spawn_remain--;
@@ -60,64 +55,30 @@ void StateManager::Tick()
 
     if (append_entity.size())
     {
-        move(append_entity.begin(), append_entity.end(), std::back_inserter(entities));
+        for(auto ent: append_entity){
+            main_scene->AddEntity(ent);
+        }
         append_entity.clear();
     }
 
-    for (auto e : entities)
-    {
-        e->tick();
-    }
+    scenes[current_scene]->tick();
 
     if(game_state.enemies_spawn_remain == 0 && game_state.enemies_count == 0){
         EndRound();
     }
 
+    //TODO: If scene is main count tick
     ticks++;
 }
 
 void StateManager::Render()
 {
     map.render();
-    for (auto e : entities)
-    {
-        e->render();
-    }
 
-    auto &window = Window::Get();
 
-    SDL_SetRenderDrawColor(window.get_renderer(), 255, 255, 255, 255);
+    scenes[current_scene]->render();
 
-    SDL_Rect hp{
-        .x = 60,
-        .y = 60,
-        .h = 30,
-        .w = 240};
 
-    SDL_RenderDrawRect(window.get_renderer(), &hp);
-
-    hp.w = std::max((int)((player->state.health / player->stats.max_health) * 238.0), 0);
-    hp.x += 1;
-    hp.y += 1;
-    hp.h -= 2;
-
-    SDL_SetRenderDrawColor(window.get_renderer(), 255, 0, 0, 255);
-    SDL_RenderFillRect(window.get_renderer(), &hp);
-
-    auto font = ResourceManager::Get().GetFont("ancient24");
-    SDL_Color color = {
-        .r = 255, .b = 255, .g = 255, .a = 255};
-
-    auto current_health = std::max((int)player->state.health, 0);
-    auto text = font->Text(std::to_string(current_health) + std::string("/") + std::to_string((int)player->stats.max_health), color);
-
-    SDL_Rect r_text;
-    r_text.x = 135;
-    r_text.y = 62;
-    r_text.w = 90;
-    r_text.h = 26;
-
-    SDL_RenderCopy(window.get_renderer(), text->get(), nullptr, &r_text);
 }
 
 void StateManager::AddEntity(shared_ptr<Entity> ent)
@@ -141,4 +102,9 @@ void StateManager::EndRound()
 }
 void StateManager::Death()
 {
+}
+
+
+vector<shared_ptr<Entity>> StateManager::GetEntities(){
+    return main_scene->GetEntities();
 }

@@ -82,7 +82,7 @@ void Player::tick()
 
 
 
-    auto &entities = StateManager::Get().entities;
+    auto entities = StateManager::Get().GetEntities();
 
     auto bounds = GetBounds();
 

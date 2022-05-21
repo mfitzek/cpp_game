@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "../entity.h"
 
 #include <SDL.h>
@@ -11,7 +10,8 @@
 
 #include "../collisions/BoundingBox.h"
 
-class Projectile: public Entity{
+class Projectile : public Entity
+{
 
     double velocity_x;
     double velocity_y;
@@ -19,20 +19,15 @@ class Projectile: public Entity{
     double size = 0.002;
 
 public:
-
     Projectile(double x, double y, double vel_x, double vel_y);
+    ~Projectile();
 
     double dmg = 0;
     bool player_shot = false;
 
     void update(double delta) override;
     void tick() override;
-    void render() override; 
-
-
+    void render() override;
 
     BoundingBox GetBounds() const;
-
-
-
 };

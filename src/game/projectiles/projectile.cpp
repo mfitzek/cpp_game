@@ -13,7 +13,6 @@ Projectile::Projectile(double x, double y, double vel_x, double vel_y)
 void Projectile::update(double delta)
 {
     auto &map = StateManager::Get().map.map;
-    
 
     auto bounds = GetBounds();
 
@@ -22,8 +21,10 @@ void Projectile::update(double delta)
     bounds.y1 += (velocity_y * delta);
     bounds.y2 += (velocity_y * delta);
 
-    for(auto& l: map){
-        if(bounds.CheckCollision(l)){
+    for (auto &l : map)
+    {
+        if (bounds.CheckCollision(l))
+        {
             next_remove = true;
             return;
         }
@@ -44,7 +45,8 @@ void Projectile::render()
 
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
 
-    if(player_shot){
+    if (player_shot)
+    {
         SDL_SetRenderDrawColor(render, 67, 160, 253, 255);
     }
 
@@ -70,8 +72,14 @@ void Projectile::tick()
     }
 }
 
+BoundingBox Projectile::GetBounds() const
+{
 
-BoundingBox Projectile::GetBounds() const {
+    return BoundingBox(currentPos.x - (size / 2), currentPos.y - (size / 2), size, size);
+}
 
-    return BoundingBox(currentPos.x - (size/2), currentPos.y - (size/2), size, size);
+
+
+Projectile::~Projectile(){
+    
 }

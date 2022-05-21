@@ -7,6 +7,8 @@
 #include "enemies/enemy.h"
 #include "map/map.h"
 
+#include "scenes/scene.h"
+#include "scenes/main/main_scene.h"
 
 
 #include <vector>
@@ -14,6 +16,7 @@
 #include <algorithm>
 #include <iterator>
 #include <random>
+#include <unordered_map>
 
 
 using std::vector;
@@ -22,7 +25,9 @@ using std::shared_ptr;
 
 class Player;
 class Enemy;
+class Scene;
 
+class MainScene;
 
 struct EnemyStats {
     double health = 6.0;
@@ -52,31 +57,36 @@ class StateManager {
     private:
 
         std::default_random_engine random_eng;
-
         size_t ticks = 0;
 
         vector<shared_ptr<Entity>> append_entity;
        
-
         static StateManager s_instance;
         StateManager();
+
+
+        std::string current_scene = "main";
+        std::unordered_map<std::string, shared_ptr<Scene>> scenes;
+        shared_ptr<MainScene> main_scene;
 
     public:
 
         shared_ptr<Player> player;
-        vector<shared_ptr<Entity>> entities;
 
         void AddEntity(shared_ptr<Entity> entity);
 
         void Update(double delta);
         void Tick();
         void Render();
+
         static StateManager& Get();
 
         Map map;
 
         struct EnemyStats enemy_stats;
         struct GameState game_state;
+
+        vector<shared_ptr<Entity>> GetEntities();
 
 
         void NextRound();

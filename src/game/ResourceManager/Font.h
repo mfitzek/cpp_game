@@ -10,18 +10,16 @@
 
 #include <memory>
 
-class Font{
-    private:
+class Font
+{
+private:
+    TTF_Font *font;
+    int font_size;
 
-        TTF_Font* font;
-        int font_size;
+public:
+    Font(std::string path, int size);
 
-    public:
-        Font(std::string path, int size);
-        
-        std::shared_ptr<Texture> Text(std::string text, SDL_Color& color) const;
+    std::shared_ptr<Texture> Text(std::string text, SDL_Color &color) const;
 
-        ~Font();
-
-
+    ~Font();
 };
