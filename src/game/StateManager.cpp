@@ -67,8 +67,9 @@ void StateManager::Tick()
         EndRound();
     }
 
-    //TODO: If scene is main count tick
-    ticks++;
+    if(current_scene == "main"){
+        ticks++;
+    }
 }
 
 void StateManager::Render()
