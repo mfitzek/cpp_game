@@ -211,6 +211,10 @@ void Player::projectile_hit(std::shared_ptr<Projectile> projectile){
     if(!projectile->player_shot){
         this->state.health -= projectile->dmg;
         projectile->next_remove = true;
+
+        if(state.health <= 0 ){
+            StateManager::Get().Death();
+        }
     }
 }
 

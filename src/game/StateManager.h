@@ -89,7 +89,7 @@ class StateManager {
 
         vector<shared_ptr<Entity>> GetEntities();
 
-
+        void NewGame();
         void NextRound();
         void EndRound();
         void Death();

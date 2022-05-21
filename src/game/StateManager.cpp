@@ -13,25 +13,42 @@ StateManager::StateManager()
     std::random_device rd;
     random_eng = std::default_random_engine(rd());
 
+    NewGame();
+
+}
+
+void StateManager::NewGame(){
+    // if(scenes.contains("main")){
+    //     scenes.erase("main");
+    // }
+
+
+    game_state.round = 0;
+    game_state.enemies_count = 0;
+    game_state.enemies_spawn_remain = 0;
+
+
+    game_state.health_buffs = 0;
+    game_state.armor_buffs = 0;
+    game_state.attack_damage_buffs = 0;
+    game_state.attack_speed_buffs = 0;
+    game_state.lifesteal_buffs = 0;
+    game_state.movement_buffs = 0;
+    game_state.jump_height_buffs = 0;
+
+
+    size_t last_spawn_tick = 0;
+
     player = std::make_shared<Player>(0.5, 0.5);
 
     main_scene = std::make_shared<MainScene>();
     scenes.insert_or_assign("main", main_scene);
     main_scene->AddEntity(player);
 
-    scenes.insert_or_assign("score", std::make_shared<ScoreScene>(25));
-
-    current_scene = "score";
-
-
+    current_scene = "main";
 
     NextRound();
 
-    // entities.push_back(std::make_shared<Enemy>(0.2, 0.2));
-    // entities.push_back(std::make_shared<Enemy>(0.3, 0.2));
-    // entities.push_back(std::make_shared<Enemy>(0.9, 0.2));
-    // entities.push_back(std::make_shared<Enemy>(0.6, 0.2));
-    // entities.push_back(std::make_shared<Enemy>(0.4, 0.2));
 }
 
 void StateManager::Update(double delta)
@@ -108,6 +125,9 @@ void StateManager::EndRound()
 }
 void StateManager::Death()
 {
+    scenes.insert_or_assign("score", std::make_shared<ScoreScene>(game_state.round));
+    current_scene = "score";
+
 }
 
 
