@@ -19,7 +19,7 @@ class Card;
 
 class CardScene: public Scene{
     private:
-        bool m_pressed = false;
+        bool m_pressed = true;
         std::vector<Card> cards;
 
     public:

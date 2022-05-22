@@ -42,8 +42,6 @@ void StateManager::NewGame()
     main_scene->AddEntity(player);
 
     EndRound();
-
-    NextRound();
 }
 
 void StateManager::Update(double delta)
@@ -115,7 +113,8 @@ void StateManager::EndRound()
 {
     scenes.insert_or_assign("cards", std::make_shared<CardScene>());
     current_scene = "cards";
-    // NextRound();
+    NextRound();
+
 }
 void StateManager::Death()
 {
