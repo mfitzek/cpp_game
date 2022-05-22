@@ -15,6 +15,9 @@
 #include <memory>
 #include <cmath>
 
+
+#include "../../cards/Card.h"
+
 using std::shared_ptr;
 using std::vector;
 

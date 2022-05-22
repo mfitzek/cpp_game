@@ -71,6 +71,7 @@ void MainScene::render()
     r_text.h = 26;
 
     SDL_RenderCopy(window.get_renderer(), health_text->get(), nullptr, &r_text);
+
 }
 
 void MainScene::AddEntity(shared_ptr<Entity> entity)

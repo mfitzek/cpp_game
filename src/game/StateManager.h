@@ -10,6 +10,8 @@
 #include "scenes/scene.h"
 #include "scenes/main/main_scene.h"
 #include "scenes/score/score_scene.h"
+#include "scenes/card_scene/card_scene.h"
+#include "cards/Card.h"
 
 
 #include <vector>
@@ -29,6 +31,8 @@ class Enemy;
 class Scene;
 
 class MainScene;
+class CardScene;
+class Card;
 
 struct EnemyStats {
     double health = 6.0;
@@ -57,7 +61,7 @@ class StateManager {
 
     private:
 
-        std::default_random_engine random_eng;
+
         size_t ticks = 0;
 
         vector<shared_ptr<Entity>> append_entity;
@@ -66,11 +70,13 @@ class StateManager {
         StateManager();
 
 
-        std::string current_scene = "main";
+        std::string current_scene;
         std::unordered_map<std::string, shared_ptr<Scene>> scenes;
         shared_ptr<MainScene> main_scene;
 
     public:
+    
+        std::default_random_engine random_eng;
 
         shared_ptr<Player> player;
 
@@ -93,6 +99,8 @@ class StateManager {
         void NextRound();
         void EndRound();
         void Death();
+
+        void AddCard(Card card);
 
 
 

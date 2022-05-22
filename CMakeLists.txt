@@ -42,6 +42,10 @@ FILE(GLOB src_files
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/main/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/score/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/score/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/card_scene/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/scenes/card_scene/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/cards/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/game/cards/*.cpp"
 )
 
 
