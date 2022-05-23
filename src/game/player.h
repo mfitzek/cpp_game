@@ -31,7 +31,7 @@ struct stats {
     double projectile_size = 1.0;
     double life_steal = 0.0;
     double max_health = 40.0;
-    double armor = 1.0;
+    double armor = 0.0;
     double jump_height = 1.0;
     uint8_t max_jumps = 1;
 
@@ -49,7 +49,7 @@ const double X_BASE_SPEED = 0.15;
 const double GRAVITY_FALL = 0.01;
 const double JUMP_VEL = 0.5;
 
-class Player: public Entity, public Observer{
+class Player: public Entity{
 
 private:
 
@@ -81,10 +81,11 @@ public:
     void jump();
     void gravity();
 
+    void heal(double health);
+    void hit_enemy(std::shared_ptr<Projectile> proj);
+
 
     void shoot();
     void projectile_hit(std::shared_ptr<Projectile> projectile);
-
-    void OnUpdate() override;
 
 };

@@ -41,7 +41,7 @@ void StateManager::NewGame()
     scenes.insert_or_assign("main", main_scene);
     main_scene->AddEntity(player);
 
-    EndRound();
+    NextRound();
 }
 
 void StateManager::Update(double delta)
@@ -108,12 +108,14 @@ void StateManager::NextRound()
 {
     game_state.round++;
     game_state.enemies_spawn_remain = (3 + (game_state.round * 0.5));
+    enemy_stats.health += 1;
+    current_scene = "main";
+
 }
 void StateManager::EndRound()
 {
     scenes.insert_or_assign("cards", std::make_shared<CardScene>());
     current_scene = "cards";
-    NextRound();
 
 }
 void StateManager::Death()
@@ -135,24 +137,31 @@ void StateManager::AddCard(Card card){
     {
     case CardType::AttackDamage:
         game_state.attack_damage_buffs++;
+        player->stats.attack_damage += 2.0;
         break;
     case CardType::AttackSpeed:
         game_state.attack_speed_buffs++;
+        player->stats.attack_speed *= 1.12;
         break;
     case CardType::LifeSteal:
         game_state.lifesteal_buffs++;
+        player->stats.life_steal += 0.03;
+
         break;
     case CardType::Health:
         game_state.health_buffs++;
+        player->stats.max_health += 10.0;
+        player->state.health += 10.0;
         break;
     case CardType::Armor:
         game_state.armor_buffs++;
+        player->stats.armor += 0.05;
         break;
     case CardType::Movement:
         game_state.movement_buffs++;
+        player->stats.movement_speed *= 1.10;
         break;
     }
     
-    current_scene = "main";
-
+    NextRound();
 }

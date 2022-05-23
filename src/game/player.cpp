@@ -5,8 +5,6 @@
 Player::Player(double x, double y)
 {
 
-    // Window::Get().Attach(this);
-
     this->currentPos.x = x;
     this->currentPos.y = y;
 }
@@ -136,22 +134,17 @@ void Player::render()
 {
     Window &window = Window::Get();
 
-
-
     SDL_Rect rect{
-        .x = (int)(this->currentPos.x * window.GetWidth()),
-        .y = (int)(this->currentPos.y * window.GetHeight()),
+        .x = static_cast<int>(this->currentPos.x * window.GetWidth()),
+        .y = static_cast<int>(this->currentPos.y * window.GetHeight()),
         .w = this->GetActualWidth(),
         .h = this->GetActualHeight()};
 
     auto renderer = window.get_renderer();
 
-    
     auto p_texture = ResourceManager::Get().GetTexture("player");
     SDL_RenderCopy(renderer, p_texture->get(), nullptr, &rect);
 
-   // SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    //SDL_RenderFillRect(renderer, &rect);
 }
 
 int Player::GetActualWidth() const
@@ -168,10 +161,6 @@ BoundingBox Player::GetBounds() const
     return BoundingBox(currentPos.x, currentPos.y, width, height);
 }
 
-void Player::OnUpdate()
-{
-
-}
 
 
 void Player::shoot(){
@@ -209,7 +198,13 @@ void Player::shoot(){
 
 void Player::projectile_hit(std::shared_ptr<Projectile> projectile){
     if(!projectile->player_shot){
-        this->state.health -= projectile->dmg;
+
+        double resist = 1.0 - stats.armor;
+        if(resist < 0.1) {
+            resist = 0.1;
+        }
+
+        this->state.health -= projectile->dmg * resist;
         projectile->next_remove = true;
 
         if(state.health <= 0 ){
@@ -225,4 +220,15 @@ double Player::GetHeight() const {
 
 double Player::GetWidth() const {
     return width;
+}
+
+void Player::heal(double health){
+    state.health += health;
+    if(state.health > stats.max_health){
+        state.health = stats.max_health;
+    }
+}
+
+void Player::hit_enemy(std::shared_ptr<Projectile> proj){
+    heal(proj->dmg * stats.life_steal);
 }

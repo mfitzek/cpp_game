@@ -26,11 +26,11 @@ void Card::render()
         break;
     case CardType::AttackSpeed:
         card_text1 = "Attack Speed";
-        card_text2 = "+5%";
+        card_text2 = "+12%";
         break;
     case CardType::LifeSteal:
         card_text1 = "Life Steal";
-        card_text2 = "+1%";
+        card_text2 = "+3%";
         break;
     case CardType::Health:
         card_text1 = "Health";
