@@ -36,6 +36,7 @@ public:
     virtual void render() override;
 
     void AddEntity(shared_ptr<Entity> entity);
+    void NextRound();
     vector<shared_ptr<Entity>> GetEntities();
     size_t GetTicks();
 };

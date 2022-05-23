@@ -110,6 +110,7 @@ void StateManager::NextRound()
     game_state.enemies_spawn_remain = (3 + (game_state.round * 0.5));
     enemy_stats.health += 1;
     current_scene = "main";
+    main_scene->NextRound(); // remove all entities except player
 
 }
 void StateManager::EndRound()

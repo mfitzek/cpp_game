@@ -84,3 +84,12 @@ vector<shared_ptr<Entity>> MainScene::GetEntities(){
     return entities;
 }
 
+
+void MainScene::NextRound(){
+    auto player = StateManager::Get().player;
+
+    auto to_remove = std::remove_if(entities.begin(), entities.end(), [player](shared_ptr<Entity> e)
+                                    { return e.get() != player.get(); });
+    entities.erase(to_remove, entities.end());
+
+}
