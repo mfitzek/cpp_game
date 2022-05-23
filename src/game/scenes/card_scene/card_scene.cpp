@@ -9,8 +9,25 @@ CardScene::CardScene()
     double x = 0.1;
 
     for(int i = 0; i < 3; i++){
-        auto rnd = distr(StateManager::Get().random_eng);
-        auto card_type = static_cast<CardType>(rnd);
+
+        CardType card_type = CardType::AttackDamage;
+        while(true){
+            bool ok = true;
+
+            auto rnd = distr(StateManager::Get().random_eng);
+            card_type = static_cast<CardType>(rnd);
+
+            for(auto& card:cards){
+                if(card.type == card_type){
+                    ok = false;
+                    break;
+                }
+            }
+
+            if(ok){
+                break;
+            }
+        }
 
         cards.emplace_back(card_type, x , 0.1);
         x += 0.3;
