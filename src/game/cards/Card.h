@@ -23,8 +23,8 @@ class Card
 {
 private:
     double x, y;
-    double width = 0.25;
-    double height = 0.8;
+    double width = 0.20;
+    double height = 0.7;
 
 
 

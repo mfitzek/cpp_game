@@ -16,7 +16,7 @@ class Projectile : public Entity
     double velocity_x;
     double velocity_y;
 
-    double size = 0.002;
+    double size = 0.004;
 
 public:
     Projectile(double x, double y, double vel_x, double vel_y);

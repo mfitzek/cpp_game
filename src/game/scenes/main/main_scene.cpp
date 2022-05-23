@@ -72,6 +72,22 @@ void MainScene::render()
 
     SDL_RenderCopy(window.get_renderer(), health_text->get(), nullptr, &r_text);
 
+
+    auto round_text = font->Text(std::to_string(state_manager.game_state.round), color);
+    SDL_Rect round_rect;
+
+    round_rect.x = static_cast<int>(0.90 * window.GetWidth());
+    round_rect.y = static_cast<int>(0.05 * window.GetHeight());
+    round_rect.w = static_cast<int>(0.02 * window.GetWidth());
+    round_rect.h = static_cast<int>(0.06 * window.GetHeight());
+
+    if(state_manager.game_state.round >= 10){
+        round_rect.w *= 2.1;
+    }
+
+    SDL_RenderCopy(window.get_renderer(), round_text->get(), nullptr, &round_rect);
+
+
 }
 
 void MainScene::AddEntity(shared_ptr<Entity> entity)

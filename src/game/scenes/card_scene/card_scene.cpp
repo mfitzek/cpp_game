@@ -29,7 +29,7 @@ CardScene::CardScene()
             }
         }
 
-        cards.emplace_back(card_type, x , 0.1);
+        cards.emplace_back(card_type, x , 0.15);
         x += 0.3;
 
     }

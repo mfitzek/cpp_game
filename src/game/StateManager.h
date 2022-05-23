@@ -36,6 +36,7 @@ class Card;
 
 struct EnemyStats {
     double health = 6.0;
+    double attack_damage = 1.0; 
     double attack_speed = 1.0;
 };
 

@@ -5,8 +5,12 @@ Enemy::Enemy(double x, double y)
     currentPos.x = x;
     currentPos.y = y;
 
-    state.last_shot = StateManager::Get().GetTicks();
-    state.health = stats.max_health;
+    auto& state_manager = StateManager::Get();
+
+    state.last_shot = state_manager.GetTicks();
+
+    state.health = stats.max_health = state_manager.enemy_stats.health;
+    stats.attack_damage = state_manager.enemy_stats.attack_damage;
 }
 
 void Enemy::update(double delta)
@@ -105,15 +109,19 @@ void Enemy::shoot()
     state.last_shot = StateManager::Get().GetTicks();
     auto player = StateManager::Get().player;
     auto player_p = StateManager::Get().player->GetPosition();
-    double x_diff = (player_p.x + (player->GetWidth() / 2)) - this->currentPos.x;
-    double y_diff = (player_p.y + (player->GetHeight() / 2)) - this->currentPos.y;
 
-    double dist = sqrt(pow(x_diff, 2) + pow(y_diff, 2));
+    double current_x = this->currentPos.x + (width/2);
+    double current_y = this->currentPos.y + (height/2);
+
+    double x_diff = (player_p.x + (player->GetWidth() / 2)) - current_x;
+    double y_diff = (player_p.y + (player->GetHeight() / 2)) - current_y;
+
+    double dist = sqrt((x_diff, 2) + pow(y_diff, 2));
 
     double x_dir = x_diff / dist;
     double y_dir = y_diff / dist;
 
-    auto p = std::make_shared<Projectile>(this->currentPos.x, this->currentPos.y, x_dir * 0.3, y_dir * 0.3);
+    auto p = std::make_shared<Projectile>(current_x, current_y, x_dir * stats.projectile_speed, y_dir * stats.projectile_speed);
     p->dmg = stats.attack_damage;
 
     StateManager::Get().AddEntity(p);

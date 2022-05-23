@@ -52,16 +52,19 @@ void StateManager::Update(double delta)
 void StateManager::Tick()
 {
 
-    if (game_state.enemies_spawn_remain && ticks - game_state.last_spawn_tick >= 60)
+
+
+    if (game_state.enemies_spawn_remain && ticks - game_state.last_spawn_tick >= 66)
     {
         game_state.enemies_spawn_remain--;
         game_state.enemies_count++;
         game_state.last_spawn_tick = ticks;
 
-        std::uniform_real_distribution<double> distr(0.000001, 0.9999);
+        std::uniform_real_distribution<double> distr_x(0.1, 0.85);
+        std::uniform_real_distribution<double> distr_y(0.1, 0.4);
 
-        double x = std::fmod(distr(random_eng), 0.85);
-        double y = std::fmod(distr(random_eng), 0.4);
+        double x = distr_x(random_eng);
+        double y = distr_y(random_eng);
 
         append_entity.push_back(std::make_shared<Enemy>(x, y));
     }
@@ -106,9 +109,18 @@ size_t StateManager::GetTicks() const
 
 void StateManager::NextRound()
 {
+    
     game_state.round++;
     game_state.enemies_spawn_remain = (3 + (game_state.round * 0.5));
-    enemy_stats.health += 1;
+    
+    if(game_state.round > 1){
+        enemy_stats.health += 1;
+        enemy_stats.attack_damage += 0.25;
+        player->stats.max_health += 2;
+        player->heal(2);
+    }
+
+
     current_scene = "main";
     main_scene->NextRound(); // remove all entities except player
 
